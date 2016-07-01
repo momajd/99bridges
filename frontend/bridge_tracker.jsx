@@ -1,14 +1,16 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
+var React = require('react');
+var ReactDOM = require('react-dom');
 
 var BridgeTracker = React.createClass({
   render: function () {
-    <div>
+    return (
+      <div>
       Hello there
-    </div>
+      </div>
+    );
   }
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  ReactDOM.render(<BridgeTracker/>, document.getElementById('content'))
+document.addEventListener("DOMContentLoaded", function() {
+  ReactDOM.render(<BridgeTracker />, document.getElementById('content'));
 });
