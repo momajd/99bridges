@@ -3,7 +3,7 @@ class Api::BridgesController < ApplicationController
     @bridges = Bridge.all
     render :index
   end
-
+  
   def create
   end
 
