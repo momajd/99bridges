@@ -1,18 +1,19 @@
 var React = require('react');
 var BridgeStore = require('../../stores/bridge_store');
 var ClientActions = require('../../actions/client_actions');
+var BridgeIndexItem = require('./bridge_index_item');
 
 var BridgeIndex = React.createClass({
   getInitialState: function() {
     return {bridges: BridgeStore.all()};
   },
 
-  updateBenches: function() {
+  updateBridges: function() {
     this.setState({bridges: BridgeStore.all()});
   },
 
   componentDidMount: function() {
-    BridgeStore.addListener(this.updateBenches);
+    BridgeStore.addListener(this.updateBridges);
     ClientActions.fetchAllBridges();
   },
 
@@ -24,7 +25,7 @@ var BridgeIndex = React.createClass({
         {
           bridgeKeys.map(function(key) {
             var bridge = bridges[key];
-            return <div key={bridge.id}>{bridge.title}</div>;
+            return <BridgeIndexItem key={bridge.id} bridge={bridge} />;
           })
         }
       </div>
