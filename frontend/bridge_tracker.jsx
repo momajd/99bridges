@@ -1,7 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 // Components
-var BridgeIndex = require('./components/bridge_components/bridge_index');
+var Search = require('./components/bridge_components/search');
 
 // TODO remove after testing
 window.BridgeStore = require('./stores/bridge_store');
@@ -11,7 +11,7 @@ var BridgeTracker = React.createClass({
   render: function () {
     return (
       <div>
-        <BridgeIndex />
+        <Search />
       </div>
     );
   }

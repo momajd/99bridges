@@ -18,8 +18,8 @@ var BridgeIndex = React.createClass({
   },
 
   render: function() {
-    var bridgeKeys = Object.keys(this.state.bridges);
-    var bridges = this.state.bridges;
+    var bridgeKeys = Object.keys(this.props.bridges);
+    var bridges = this.props.bridges;
     return (
       <div>
         {
