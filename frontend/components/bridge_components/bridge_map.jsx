@@ -6,6 +6,7 @@ var ClientActions = require('../../actions/client_actions');
 var BridgeMap = React.createClass({
   componentDidMount: function() {
     this.placeMap();
+    this.markers = [];
 
     // fetch bridges after map location has been changed
     var self = this;
@@ -16,7 +17,7 @@ var BridgeMap = React.createClass({
   },
 
   componentDidUpdate: function() {
-    this.placeMarkers();
+    this.updateMarkers();
   },
 
   getMapBounds: function() {
@@ -40,23 +41,64 @@ var BridgeMap = React.createClass({
       zoom: 12
     };
     this.map = new google.maps.Map(mapDOMNode, mapOptions);
-
-    // TODO remove after testing
-    window.map = this.map;
   },
 
-  placeMarkers: function () {
-    var bridgeKeys = Object.keys(this.props.bridges);
-
-    bridgeKeys.forEach(function(key) {
-      var location = this.props.bridges[key];
-      var markerPos = {lat: location.lat, lng: location.lng};
-
-      var marker = new google.maps.Marker({
-        position: markerPos,
-        map: this.map
-      });
+  updateMarkers: function () {
+    this.newBridgesToAdd().forEach(function(bridge) {
+      this.createMarker(bridge);
     }, this);
+
+    this.markersToRemove().forEach(function(marker) {
+      this.removeMarker(marker);
+    }, this);
+  },
+
+  newBridgesToAdd: function () {
+    var allBridges = this.props.bridges;
+    var currentMarkerIds = this.markers.map(function(marker){return marker.bridgeId});
+    var newBridges = [];
+
+    // add if a bridge in the props in not yet in this.markers
+    Object.keys(allBridges).forEach(function(key) {
+      var bridge = allBridges[key];
+      if (!currentMarkerIds.includes(bridge.id) ) {
+        newBridges.push(bridge);
+      }
+    });
+    return newBridges;
+  },
+
+  markersToRemove: function () {
+    var allBridges = this.props.bridges;
+    var allBridgeIds = Object.keys(allBridges).map(function(key) {
+      return allBridges[key].id;
+    });
+    var removeMarkers = [];
+
+    // remove from view if a marker is not in the props that were received
+    this.markers.forEach(function(marker) {
+      if (!allBridgeIds.includes(marker.bridgeId)) {
+        removeMarkers.push(marker);
+      }
+    });
+    return removeMarkers;
+  },
+
+  createMarker: function (bridge) {
+    var markerPos = {lat: bridge.lat, lng: bridge.lng};
+    var marker = new google.maps.Marker({
+      position: markerPos,
+      map: this.map,
+      bridgeId: bridge.id
+    });
+
+    this.markers.push(marker);
+  },
+
+  removeMarker: function (marker) {
+    marker.setMap(null);
+    var idx = this.markers.indexOf(marker);
+    this.markers.splice(idx, 1);
   },
 
   render: function () {
