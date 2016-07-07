@@ -6,14 +6,31 @@ var ClientActions = require('../../actions/client_actions');
 var BridgeMap = React.createClass({
   componentDidMount: function() {
     this.placeMap();
-    BridgeStore.addListener(this.placeMarkers);
 
     // fetch bridges after map location has been changed
+    var self = this;
     google.maps.event.addListener(this.map, 'idle', function() {
-      ClientActions.fetchAllBridges();
-    })
+      var bounds = self.getMapBounds();
+      ClientActions.fetchAllBridges(bounds);
+    });
+  },
 
-    console.log("BridgeMap - componentDidMount");
+  componentDidUpdate: function() {
+    console.log("BridgeMap - componentDidUpdate");
+    this.placeMarkers();
+  },
+
+  getMapBounds: function() {
+  // https://developers.google.com/maps/documentation/javascript/reference#LatLngBounds
+
+    var latLngBoundsObj = this.map.getBounds();
+    var northEast = latLngBoundsObj.getNorthEast();
+    var southWest = latLngBoundsObj.getSouthWest();
+
+    return {
+      northEast: {lat: northEast.lat(), lng: northEast.lng()},
+      southWest: {lat: southWest.lat(), lng: southWest.lng()}
+    };
   },
 
   placeMap: function () {
@@ -23,6 +40,9 @@ var BridgeMap = React.createClass({
       zoom: 12
     };
     this.map = new google.maps.Map(mapDOMNode, mapOptions);
+
+    // TODO remove after testing
+    window.map = this.map;
   },
 
   placeMarkers: function () {
@@ -38,10 +58,12 @@ var BridgeMap = React.createClass({
         map: this.map
       });
     }, this);
+
+    console.log("markers placed", bridgeKeys);
   },
 
   render: function () {
-    console.log("BridgeMap-render");
+    console.log("map rendered");
     return (
       <div className='map' ref='map'></div>
     );

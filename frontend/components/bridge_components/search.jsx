@@ -11,12 +11,13 @@ var Search = React.createClass({
   },
 
   updateBridges: function () {
+    console.log("bridges updated in Search component");
     this.setState({bridges: BridgeStore.all()});
   },
 
   componentDidMount: function () {
     BridgeStore.addListener(this.updateBridges);
-    ClientActions.fetchAllBridges();
+    // ClientActions.fetchAllBridges();
     console.log("Search componentDidMount");
   },
 

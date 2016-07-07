@@ -1,9 +1,9 @@
 class Api::BridgesController < ApplicationController
   def index
-    @bridges = Bridge.all
+    @bridges = Bridge.in_bounds(params[:bounds])
     render :index
   end
-  
+
   def create
   end
 
