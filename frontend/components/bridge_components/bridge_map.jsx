@@ -5,15 +5,24 @@ var ClientActions = require('../../actions/client_actions');
 
 var BridgeMap = React.createClass({
   componentDidMount: function() {
+    this.placeMap();
+    BridgeStore.addListener(this.placeMarkers);
+
+    // fetch bridges after map location has been changed
+    google.maps.event.addListener(this.map, 'idle', function() {
+      ClientActions.fetchAllBridges();
+    })
+
+    console.log("BridgeMap - componentDidMount");
+  },
+
+  placeMap: function () {
     var mapDOMNode = ReactDOM.findDOMNode(this.refs.map);
     var mapOptions = {
       center: {lat: 37.7758, lng: -122.435}, // this is SF
-      zoom: 13
+      zoom: 12
     };
     this.map = new google.maps.Map(mapDOMNode, mapOptions);
-
-    BridgeStore.addListener(this.placeMarkers);
-    ClientActions.fetchAllBridges();
   },
 
   placeMarkers: function () {
@@ -32,6 +41,7 @@ var BridgeMap = React.createClass({
   },
 
   render: function () {
+    console.log("BridgeMap-render");
     return (
       <div className='map' ref='map'></div>
     );
