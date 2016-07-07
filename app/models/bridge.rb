@@ -24,7 +24,7 @@ class Bridge < ActiveRecord::Base
     south_west = bounds["southWest"]
 
     Bridge.where("
-      (lat BETWEEN ? AND ?) AND (long BETWEEN ? AND ?)",
+      (lat BETWEEN ? AND ?) AND (lng BETWEEN ? AND ?)",
       south_west["lat"], north_east["lat"], south_west["lng"], north_east["lng"]
     )
   end

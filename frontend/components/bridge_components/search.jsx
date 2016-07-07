@@ -11,18 +11,14 @@ var Search = React.createClass({
   },
 
   updateBridges: function () {
-    console.log("bridges updated in Search component");
     this.setState({bridges: BridgeStore.all()});
   },
 
   componentDidMount: function () {
     BridgeStore.addListener(this.updateBridges);
-    // ClientActions.fetchAllBridges();
-    console.log("Search componentDidMount");
   },
 
   render: function() {
-    console.log("Search-render");
     return (
       <div>
         <BridgeMap bridges={this.state.bridges}/>

@@ -16,11 +16,11 @@ var BridgeMap = React.createClass({
   },
 
   componentDidUpdate: function() {
-    console.log("BridgeMap - componentDidUpdate");
     this.placeMarkers();
   },
 
   getMapBounds: function() {
+  // return object to be parsed by backend API
   // https://developers.google.com/maps/documentation/javascript/reference#LatLngBounds
 
     var latLngBoundsObj = this.map.getBounds();
@@ -49,21 +49,17 @@ var BridgeMap = React.createClass({
     var bridgeKeys = Object.keys(this.props.bridges);
 
     bridgeKeys.forEach(function(key) {
-      var lat = this.props.bridges[key].lat;
-      var lng = this.props.bridges[key].long;
-      var markerPos = {lat: lat, lng: lng};
+      var location = this.props.bridges[key];
+      var markerPos = {lat: location.lat, lng: location.lng};
 
       var marker = new google.maps.Marker({
         position: markerPos,
         map: this.map
       });
     }, this);
-
-    console.log("markers placed", bridgeKeys);
   },
 
   render: function () {
-    console.log("map rendered");
     return (
       <div className='map' ref='map'></div>
     );

@@ -8,6 +8,6 @@
 
 
 bridge = Bridge.create([
-  {title: "San Francisco Bay Bridge", description: "cool", lat: 37.798092, long: -122.377996},
-  {title: "Golden Gate Bridge", description: "ok", lat: 37.819492, long: -122.478482}
+  {title: "San Francisco Bay Bridge", description: "cool", lat: 37.798092, lng: -122.377996},
+  {title: "Golden Gate Bridge", description: "ok", lat: 37.819492, lng: -122.478482}
 ])

@@ -4,5 +4,5 @@ json.array! @bridges do |bridge|
   json.title bridge.title
   json.description bridge.description
   json.lat bridge.lat
-  json.long bridge.long
+  json.lng bridge.lng
 end
