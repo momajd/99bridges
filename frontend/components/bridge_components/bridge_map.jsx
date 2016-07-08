@@ -14,6 +14,19 @@ var BridgeMap = React.createClass({
       var bounds = self.getMapBounds();
       ClientActions.fetchAllBridges(bounds);
     });
+
+    // TODO: OPEN A INFOWINDOW WITHOUT A MARKER. DELETE IF NOT USED
+    // google.maps.event.addListener(this.map, 'click', function (e) {
+    //   var position = e.latLng;
+    //   var myLatLng = new google.maps.LatLng({lat: -34, lng: 151});
+    //
+    //   var infoWindow = new google.maps.InfoWindow({
+    //     content: 'testing..'
+    //   });
+    //
+    //   infoWindow.setPosition(position);
+    //   infoWindow.open(self.map)
+    // });
   },
 
   componentDidUpdate: function() {

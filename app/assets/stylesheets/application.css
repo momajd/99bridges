@@ -14,7 +14,30 @@
  *= require_self
  */
 
+ html, body {
+   height: 100%;
+   width: 100%;
+ }
+
+ .search-container {
+   width: 100%;
+   height: 100vh;
+   display: flex;
+ }
+
 .map {
-  width: 600px;
-  height: 600px;
+  width: 60%;
+  height: 100%;
+}
+
+.bridge-index {
+  width: 40%;
+  margin: 20px;
+}
+
+.bridge-index-item {
+  width: 100%;
+  background: lightgray;
+  border-radius: 5px;
+  padding: 10px;
 }

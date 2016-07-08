@@ -20,7 +20,7 @@ var SearchContainer = React.createClass({
 
   render: function() {
     return (
-      <div>
+      <div className='search-container'>
         <BridgeMap bridges={this.state.bridges}/>
         <BridgeIndex bridges={this.state.bridges}/>
       </div>
