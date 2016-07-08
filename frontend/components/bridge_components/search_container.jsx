@@ -4,7 +4,7 @@ var ClientActions = require('../../actions/client_actions');
 var BridgeMap = require('./bridge_map');
 var BridgeIndex = require('./bridge_index');
 
-var Search = React.createClass({
+var SearchContainer = React.createClass({
 
   getInitialState: function () {
     return {bridges: BridgeStore.all()};
@@ -28,4 +28,4 @@ var Search = React.createClass({
   }
 });
 
-module.exports = Search;
+module.exports = SearchContainer;

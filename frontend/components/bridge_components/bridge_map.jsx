@@ -89,7 +89,27 @@ var BridgeMap = React.createClass({
     var marker = new google.maps.Marker({
       position: markerPos,
       map: this.map,
-      bridgeId: bridge.id
+      bridgeId: bridge.id,
+      icon: {
+          url: "http://www.dot.state.oh.us/districts/D11/newsreleases/Map%20Icons/Bridge-icon.png",
+          scaledSize: {
+           width: 100,
+           height: 80
+          }
+      }
+      // title: "test"
+    });
+
+    var infoWindow = new google.maps.InfoWindow({
+      content: '<h3>' + bridge.title + '</h3>'
+    });
+
+    google.maps.event.addListener(marker, 'click', function() {
+      infoWindow.open(this.map, marker);
+    });
+
+    google.maps.event.addListener(this.map, 'click', function() {
+      infoWindow.close();
     });
 
     this.markers.push(marker);
