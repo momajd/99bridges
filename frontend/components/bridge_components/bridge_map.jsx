@@ -6,8 +6,7 @@ var ClientActions = require('../../actions/client_actions');
 var BridgeMap = React.createClass({
   componentDidMount: function() {
     this.placeMap();
-    this.markers = [];
-    this.markerObjects = {};
+    this.markers = {};
 
     // fetch bridges after map location has been changed
     var self = this;
@@ -51,7 +50,7 @@ var BridgeMap = React.createClass({
   placeMap: function () {
     var mapDOMNode = ReactDOM.findDOMNode(this.refs.map);
     var mapOptions = {
-      center: {lat: 37.7758, lng: -122.435}, // this is SF
+      center: {lat: 37.7758, lng: -122.435}, // TODO update to user location
       zoom: 12
     };
     this.map = new google.maps.Map(mapDOMNode, mapOptions);
@@ -69,16 +68,13 @@ var BridgeMap = React.createClass({
 
   newBridgesToAdd: function () {
     var allBridges = this.props.bridges;
-    var currentMarkerIds = this.markers.map(function(marker){return marker.bridgeId});
-    console.log(currentMarkerIds);
-    console.log(Object.keys(this.markerObjects));
-    // var currentMarkerIds = Object.keys(this.markerObjects);
     var newBridges = [];
 
     // add if a bridge in the props is not yet in this.markers
+    var self = this;
     Object.keys(allBridges).forEach(function(key) {
       var bridge = allBridges[key];
-      if (!currentMarkerIds.includes(bridge.id) ) {
+      if (!self.markers.hasOwnProperty(bridge.id) ) {
         newBridges.push(bridge);
       }
     });
@@ -92,10 +88,11 @@ var BridgeMap = React.createClass({
     });
     var removeMarkers = [];
 
-    // remove from view if a marker is not in the props that were received
-    this.markers.forEach(function(marker) {
-      if (!allBridgeIds.includes(marker.bridgeId)) {
-        removeMarkers.push(marker);
+    var self = this;
+    Object.keys(this.markers).forEach(function(bridgeId) {
+      var marker = self.markers[bridgeId];
+      if (!allBridgeIds.includes(parseInt(bridgeId))) {
+         removeMarkers.push(marker);
       }
     });
     return removeMarkers;
@@ -130,15 +127,12 @@ var BridgeMap = React.createClass({
     });
 
     this.createHoverEffects();
-    this.markers.push(marker);
-    this.markerObjects[bridge.id] = marker;
+    this.markers[bridge.id] = marker;
   },
 
   removeMarker: function (marker) {
     marker.setMap(null);
-    var idx = this.markers.indexOf(marker);
-    this.markers.splice(idx, 1);
-    delete this.markerObjects[marker.bridgeId];
+    delete this.markers[marker.bridgeId];
   },
 
   createHoverEffects: function() {
@@ -149,9 +143,9 @@ var BridgeMap = React.createClass({
       var indexItem = $('.bridge-index-item:nth-child('+i+')');
       let bridgeId = indexItem[0].id;
       indexItem.hover(function(){
-        self.markerObjects[bridgeId].setAnimation(google.maps.Animation.BOUNCE);
+        self.markers[bridgeId].setAnimation(google.maps.Animation.BOUNCE);
       }, function() {
-        self.markerObjects[bridgeId].setAnimation(null);
+        self.markers[bridgeId].setAnimation(null);
       });
     }
   },
