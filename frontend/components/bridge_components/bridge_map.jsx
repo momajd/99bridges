@@ -7,6 +7,7 @@ var BridgeMap = React.createClass({
   componentDidMount: function() {
     this.placeMap();
     this.markers = [];
+    this.markerObjects = {};
 
     // fetch bridges after map location has been changed
     var self = this;
@@ -69,9 +70,12 @@ var BridgeMap = React.createClass({
   newBridgesToAdd: function () {
     var allBridges = this.props.bridges;
     var currentMarkerIds = this.markers.map(function(marker){return marker.bridgeId});
+    console.log(currentMarkerIds);
+    console.log(Object.keys(this.markerObjects));
+    // var currentMarkerIds = Object.keys(this.markerObjects);
     var newBridges = [];
 
-    // add if a bridge in the props in not yet in this.markers
+    // add if a bridge in the props is not yet in this.markers
     Object.keys(allBridges).forEach(function(key) {
       var bridge = allBridges[key];
       if (!currentMarkerIds.includes(bridge.id) ) {
@@ -127,12 +131,14 @@ var BridgeMap = React.createClass({
 
     this.createHoverEffects();
     this.markers.push(marker);
+    this.markerObjects[bridge.id] = marker;
   },
 
   removeMarker: function (marker) {
     marker.setMap(null);
     var idx = this.markers.indexOf(marker);
     this.markers.splice(idx, 1);
+    delete this.markerObjects[marker.bridgeId];
   },
 
   createHoverEffects: function() {
@@ -141,10 +147,11 @@ var BridgeMap = React.createClass({
     var self = this;
     for (let i=1; i <= index.length; i++) {
       var indexItem = $('.bridge-index-item:nth-child('+i+')');
+      let bridgeId = indexItem[0].id;
       indexItem.hover(function(){
-        self.markers[i-1].setAnimation(google.maps.Animation.BOUNCE);
+        self.markerObjects[bridgeId].setAnimation(google.maps.Animation.BOUNCE);
       }, function() {
-        self.markers[i-1].setAnimation(null);
+        self.markerObjects[bridgeId].setAnimation(null);
       });
     }
   },
