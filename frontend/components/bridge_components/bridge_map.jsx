@@ -140,11 +140,10 @@ var BridgeMap = React.createClass({
 
     var self = this;
     for (let i=1; i <= index.length; i++) {
-      $('.bridge-index-item:nth-child('+i+')').hover(function(){
+      var indexItem = $('.bridge-index-item:nth-child('+i+')');
+      indexItem.hover(function(){
         self.markers[i-1].setAnimation(google.maps.Animation.BOUNCE);
-      });
-
-      $('.bridge-index-item:nth-child('+i+')').mouseout(function(){
+      }, function() {
         self.markers[i-1].setAnimation(null);
       });
     }
