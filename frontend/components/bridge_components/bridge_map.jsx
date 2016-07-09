@@ -125,6 +125,7 @@ var BridgeMap = React.createClass({
       infoWindow.close();
     });
 
+    this.createHoverEffects();
     this.markers.push(marker);
   },
 
@@ -132,6 +133,21 @@ var BridgeMap = React.createClass({
     marker.setMap(null);
     var idx = this.markers.indexOf(marker);
     this.markers.splice(idx, 1);
+  },
+
+  createHoverEffects: function() {
+    var index = $('.bridge-index-item');
+
+    var self = this;
+    for (let i=1; i <= index.length; i++) {
+      $('.bridge-index-item:nth-child('+i+')').hover(function(){
+        self.markers[i-1].setAnimation(google.maps.Animation.BOUNCE);
+      });
+
+      $('.bridge-index-item:nth-child('+i+')').mouseout(function(){
+        self.markers[i-1].setAnimation(null);
+      });
+    }
   },
 
   render: function () {

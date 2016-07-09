@@ -2,7 +2,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 // Components
 var SearchContainer = require('./components/bridge_components/search_container');
-var Navigation = require('./components/navbar');
+var Navbar = require('./components/navbar');
 
 // TODO remove after testing
 window.BridgeStore = require('./stores/bridge_store');
@@ -12,7 +12,7 @@ var BridgeTracker = React.createClass({
   render: function () {
     return (
       <div>
-        <Navigation />
+        <Navbar />
         <SearchContainer />
       </div>
     );
