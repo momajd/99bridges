@@ -1,5 +1,10 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var ReactRouter = require('react-router');
+var Router = ReactRouter.Router;
+var Route = ReactRouter.Route;
+var IndexRoute = ReactRouter.IndexRoute;
+var hashHistory = ReactRouter.hashHistory;
 // Components
 var SearchContainer = require('./components/bridge_components/search_container');
 var Navbar = require('./components/navbar');
@@ -8,17 +13,25 @@ var Navbar = require('./components/navbar');
 window.BridgeStore = require('./stores/bridge_store');
 window.ClientActions = require('./actions/client_actions');
 
-var BridgeTracker = React.createClass({
+var App = React.createClass({
   render: function () {
     return (
       <div>
         <Navbar />
-        <SearchContainer />
+        {this.props.children}
       </div>
     );
   }
 });
 
+var appRouter = (
+  <Router history={hashHistory}>
+    <Route path="/" component={App}>
+      <IndexRoute component={SearchContainer}/>
+    </Route>
+  </Router>
+);
+
 document.addEventListener("DOMContentLoaded", function() {
-  ReactDOM.render(<BridgeTracker />, document.getElementById('content'));
+  ReactDOM.render(appRouter, document.getElementById('content'));
 });
