@@ -2,8 +2,16 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var BridgeStore = require('../../stores/bridge_store');
 var ClientActions = require('../../actions/client_actions');
+var BridgeFormModal = require('./bridge_form');
+var Modal = require('react-bootstrap').Modal;
+var Button = require('react-bootstrap').Button;
 
 var BridgeMap = React.createClass({
+
+  getInitialState: function() {
+    return ({ showModal: false})
+  },
+
   componentDidMount: function() {
     this.placeMap();
     this.markers = {};
@@ -15,18 +23,11 @@ var BridgeMap = React.createClass({
       ClientActions.fetchAllBridges(bounds);
     });
 
-    // TODO: OPEN A INFOWINDOW WITHOUT A MARKER. DELETE IF NOT USED
-    // google.maps.event.addListener(this.map, 'click', function (e) {
-    //   var position = e.latLng;
-    //   var myLatLng = new google.maps.LatLng({lat: -34, lng: 151});
-    //
-    //   var infoWindow = new google.maps.InfoWindow({
-    //     content: 'testing..'
-    //   });
-    //
-    //   infoWindow.setPosition(position);
-    //   infoWindow.open(self.map)
-    // });
+    // TODO
+    var self = this;
+    google.maps.event.addListener(this.map, 'click', function(e) {
+      self.setState({ showModal: true });
+    });
   },
 
   componentDidUpdate: function() {
@@ -126,7 +127,7 @@ var BridgeMap = React.createClass({
       infoWindow.close();
     });
 
-    this.createHoverEffects();
+    this.createMarkerHoverEffects();
     this.markers[bridge.id] = marker;
   },
 
@@ -135,7 +136,7 @@ var BridgeMap = React.createClass({
     delete this.markers[marker.bridgeId];
   },
 
-  createHoverEffects: function() {
+  createMarkerHoverEffects: function() {
     var index = $('.bridge-index-item');
 
     var self = this;
@@ -150,11 +151,51 @@ var BridgeMap = React.createClass({
     }
   },
 
+  closeModal: function() {
+    this.setState({showModal: false});
+  },
+
+  openModal: function() {
+    this.setState({showModal: true});
+  },
+
   render: function () {
     return (
-      <div className='map' ref='map'></div>
+      <div className='map-container'>
+        <div className='map' ref='map' onClick={this.openModal}></div>
+
+        <Modal show={this.state.showModal} onHide={this.closeModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Modal heading</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <h4>Text in a modal</h4>
+            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+
+            <hr />
+
+            <h4>Overflowing text to show scroll behavior</h4>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.closeModal}>Close</Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
     );
   }
 });
 
 module.exports = BridgeMap;
+
+// TODO: OPEN A INFOWINDOW WITHOUT A MARKER. DELETE IF NOT USED
+// google.maps.event.addListener(this.map, 'click', function (e) {
+//   var position = e.latLng;
+//   var myLatLng = new google.maps.LatLng({lat: -34, lng: 151});
+//
+//   var infoWindow = new google.maps.InfoWindow({
+//     content: 'testing..'
+//   });
+//
+//   infoWindow.setPosition(position);
+//   infoWindow.open(self.map)
+// });

@@ -3,6 +3,7 @@ var BridgeStore = require('../../stores/bridge_store');
 var ClientActions = require('../../actions/client_actions');
 var BridgeMap = require('./bridge_map');
 var BridgeIndex = require('./bridge_index');
+var BridgeFormModal = require('./bridge_form');
 
 var SearchContainer = React.createClass({
 
@@ -19,10 +20,13 @@ var SearchContainer = React.createClass({
   },
 
   render: function() {
+
     return (
       <div className='search-container'>
         <BridgeMap bridges={this.state.bridges}/>
-        <BridgeIndex bridges={this.state.bridges}/>
+        <div className='search-container-right'>
+          <BridgeIndex bridges={this.state.bridges}/>
+        </div>
       </div>
     );
   }
