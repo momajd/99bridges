@@ -98,6 +98,7 @@ var BridgeMap = React.createClass({
     return removeMarkers;
   },
 
+  // TODO: must add credit: Designed by Freepik and distributed by Flaticon
   createMarker: function (bridge) {
     var markerPos = {lat: bridge.lat, lng: bridge.lng};
     var marker = new google.maps.Marker({
@@ -105,13 +106,12 @@ var BridgeMap = React.createClass({
       map: this.map,
       bridgeId: bridge.id,
       icon: {
-          url: "http://www.dot.state.oh.us/districts/D11/newsreleases/Map%20Icons/Bridge-icon.png",
+          url: "/assets/road-pin.png",
           scaledSize: {
-           width: 100,
-           height: 80
+           width: 60,
+           height: 60
           }
       }
-      // title: "test"
     });
 
     var infoWindow = new google.maps.InfoWindow({
