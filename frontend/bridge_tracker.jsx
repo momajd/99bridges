@@ -9,6 +9,7 @@ var browserHistory = ReactRouter.browserHistory;
 // Components
 var SearchContainer = require('./components/bridge_components/search_container');
 var Navbar = require('./components/navbar');
+var BridgeShow = require('./components/bridge_components/bridge_show');
 
 // TODO remove after testing
 window.BridgeStore = require('./stores/bridge_store');
@@ -29,6 +30,7 @@ var appRouter = (
   <Router history={hashHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={SearchContainer}/>
+      <Route path=":id" component={BridgeShow}/>
     </Route>
   </Router>
 );

@@ -38,6 +38,7 @@
 
 .search-container-right {
   width: 40%;
+  overflow: scroll;
 }
 
 .bridge-index {

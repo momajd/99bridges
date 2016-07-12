@@ -120,11 +120,7 @@ var BridgeMap = React.createClass({
       map: this.map,
       bridgeId: bridge.id,
       icon: {
-          url: "/assets/road-pin.png",
-          scaledSize: {
-           width: 60,
-           height: 60
-          }
+        url: 'http://maps.google.com/mapfiles/marker_purple.png'
       }
     });
 
@@ -139,6 +135,7 @@ var BridgeMap = React.createClass({
       content: '<h3>' + bridge.title + '</h3>' + '<div class=street-view id='+ bridgeId + '></div>'
     });
 
+    // for street view
     var pano = null;
     google.maps.event.addListener(infoWindow, 'domready', function () {
         if (pano != null) {
@@ -157,13 +154,14 @@ var BridgeMap = React.createClass({
     });
 
     var self = this;
-    google.maps.event.addListener(marker, 'click', function() {
+    google.maps.event.addListener(marker, 'mouseover', function() {
       infoWindow.open(self.map, marker);
       self.infoWindowIsOpen = true; //this is for opening the modal form for a
       // new bridge. If exiting out of an infowindow, don't open the modal
+      // TODO Remove this variable if we keep 'mouseover' and 'mouseout'
     });
 
-    google.maps.event.addListener(this.map, 'click', function() {
+    google.maps.event.addListener(marker, 'mouseout', function() {
       infoWindow.close();
       self.infoWindowIsOpen = false;
     });
@@ -194,7 +192,6 @@ var BridgeMap = React.createClass({
       <div className='map-container'>
         <div className='map' ref='map'></div>
 
-        // Modal for New Bridge Form
         <Modal show={this.state.showModal} onHide={this.closeModal}>
           <Modal.Header closeButton>
             <Modal.Title>Create a New Bridge</Modal.Title>
