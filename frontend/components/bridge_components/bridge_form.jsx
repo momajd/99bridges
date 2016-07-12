@@ -1,44 +1,57 @@
 var React = require('react');
-var Modal = require('react-bootstrap').Modal;
+var FormGroup = require('react-bootstrap').FormGroup;
+var ControlLabel = require('react-bootstrap').ControlLabel;
+var FormControl = require('react-bootstrap').FormControl;
+var HelpBlock = require('react-bootstrap').HelpBlock;
 
-var BridgeForm = React.createClass({
+var NewBridgeForm = React.createClass({
 
-  // getInitialState: function () {
-  //   return { showModal: false };
-  // },
-  //
-  close: function () {
-    // this.setState({ showModal: false });
+  getInitialState: function() {
+    return {
+      title: '', description: ''
+    };
   },
-  //
-  // open: function () {
-  //   this.setState({ showModal: true });
-  // },
+
+  getValidationState: function() {
+    var length = this.state.title.length;
+    if (length > 6) return 'success';
+    else if (length > 0) return 'error';
+  },
+
+  handleTitleChange: function(e) {
+    this.setState({ title: e.target.value });
+  },
+
+  handleDescriptionChange: function(e) {
+    this.setState({ description: e.target.value });
+  },
 
   render: function () {
 
     return (
-      <div>
+      <form>
+        <FormGroup
+          controlId="formBasicText"
+          validationState={this.getValidationState()}>
 
-        <Modal show={this.state.showModal} onHide={this.close}>
-          <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <h4>Text in a modal</h4>
-            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+          <ControlLabel>Bridge Title</ControlLabel>
+          <FormControl
+            type="text"
+            placeholder="e.g. Market Street over Schuylkill River"
+            onChange={this.handleTitleChange}/>
 
-            <hr />
+          <FormControl.Feedback />
 
-            <h4>Overflowing text to show scroll behavior</h4>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={this.close}>Close</Button>
-          </Modal.Footer>
-        </Modal>
-      </div>
+          <br/>
+          <ControlLabel>Bridge Description</ControlLabel>
+          <FormControl
+            type="text"
+            placeholder="e.g. three-span continuous, steel-girder"
+            onChange={this.handleDescriptionChange}/>
+        </FormGroup>
+      </form>
     );
   }
 });
 
-module.exports = BridgeForm;
+module.exports = NewBridgeForm;

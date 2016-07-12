@@ -12,7 +12,7 @@ var Navigation = React.createClass({
       <Navbar inverse>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#">Bridge Tracker</a>
+            <a href="#">99Bridges</a>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>

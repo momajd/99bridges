@@ -5,11 +5,20 @@ var ClientActions = require('../../actions/client_actions');
 var BridgeFormModal = require('./bridge_form');
 var Modal = require('react-bootstrap').Modal;
 var Button = require('react-bootstrap').Button;
+var NewBridgeForm = require('./bridge_form');
 
 var BridgeMap = React.createClass({
 
   getInitialState: function() {
     return ({ showModal: false})
+  },
+
+  closeModal: function() {
+    this.setState({showModal: false});
+  },
+
+  openModal: function() {
+    this.setState({showModal: true});
   },
 
   componentDidMount: function() {
@@ -23,10 +32,10 @@ var BridgeMap = React.createClass({
       ClientActions.fetchAllBridges(bounds);
     });
 
-    // TODO
-    var self = this;
     google.maps.event.addListener(this.map, 'click', function(e) {
-      self.setState({ showModal: true });
+      // don't open modal if an info-window is open
+      if (window.infoWindowIsOpen) {return;}
+      self.openModal();
     });
   },
 
@@ -52,7 +61,7 @@ var BridgeMap = React.createClass({
     var mapDOMNode = ReactDOM.findDOMNode(this.refs.map);
     var mapOptions = {
       center: {lat: 37.7758, lng: -122.435}, // TODO update to user location
-      zoom: 12
+      zoom: 12,
     };
     this.map = new google.maps.Map(mapDOMNode, mapOptions);
   },
@@ -119,12 +128,15 @@ var BridgeMap = React.createClass({
       content: '<h3>' + bridge.title + '</h3>'
     });
 
+    var self = this;
     google.maps.event.addListener(marker, 'click', function() {
-      infoWindow.open(this.map, marker);
+      infoWindow.open(self.map, marker);
+      window.infoWindowIsOpen = true;
     });
 
     google.maps.event.addListener(this.map, 'click', function() {
       infoWindow.close();
+      window.infoWindowIsOpen = false;
     });
 
     this.createMarkerHoverEffects();
@@ -151,30 +163,19 @@ var BridgeMap = React.createClass({
     }
   },
 
-  closeModal: function() {
-    this.setState({showModal: false});
-  },
-
-  openModal: function() {
-    this.setState({showModal: true});
-  },
-
   render: function () {
     return (
       <div className='map-container'>
-        <div className='map' ref='map' onClick={this.openModal}></div>
+        <div className='map' ref='map'></div>
 
+        // Modal for New Bridge Form
         <Modal show={this.state.showModal} onHide={this.closeModal}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>Create a New Bridge</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h4>Text in a modal</h4>
-            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
 
-            <hr />
-
-            <h4>Overflowing text to show scroll behavior</h4>
+            <NewBridgeForm />
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.closeModal}>Close</Button>
