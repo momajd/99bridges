@@ -1,6 +1,5 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var BridgeStore = require('../../stores/bridge_store');
 var ClientActions = require('../../actions/client_actions');
 var BridgeFormModal = require('./bridge_form');
 var Modal = require('react-bootstrap').Modal;
@@ -83,10 +82,9 @@ var BridgeMap = React.createClass({
 
     // add if a bridge in the props is not yet in this.markers
     var self = this;
-    Object.keys(allBridges).forEach(function(key) {
-      var bridge = allBridges[key];
-      if (!self.markers.hasOwnProperty(bridge.id) ) {
-        newBridges.push(bridge);
+    Object.keys(allBridges).forEach(function(bridgeId) {
+      if (!self.markers.hasOwnProperty(bridgeId) ) {
+        newBridges.push(allBridges[bridgeId]);
       }
     });
     return newBridges;
@@ -94,15 +92,13 @@ var BridgeMap = React.createClass({
 
   markersToRemove: function () {
     var allBridges = this.props.bridges;
-    var allBridgeIds = Object.keys(allBridges).map(function(key) {
-      return allBridges[key].id;
-    });
     var removeMarkers = [];
 
+    // remove a bridge if it is in the markers but wasn't received by props
     var self = this;
     Object.keys(this.markers).forEach(function(bridgeId) {
       var marker = self.markers[bridgeId];
-      if (!allBridgeIds.includes(parseInt(bridgeId))) {
+      if ( !allBridges.hasOwnProperty(bridgeId) ) {
          removeMarkers.push(marker);
       }
     });

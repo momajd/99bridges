@@ -5,6 +5,14 @@ class Api::BridgesController < ApplicationController
   end
 
   def create
+    @bridge = Bridge.new(bridge_params)
+
+    if @bridge.save
+      render :show
+    else
+      @errors = @bridge.errors.full_messages
+      render 'api/shared/errors', status: 422
+    end
   end
 
   def show
@@ -12,5 +20,8 @@ class Api::BridgesController < ApplicationController
     render :show
   end
 
-
+  private
+  def bridge_params
+    params.require(:bridge).permit(:title, :description, :lat, :lng)
+  end
 end

@@ -10,7 +10,12 @@ BridgeStore.all = function () {
 };
 
 function resetAllBridges (bridges) {
+  console.log(bridges);
   _bridges = bridges;
+}
+
+function resetSingleBridge (bridge) {
+  _bridges[bridge.id] = bridge;
 }
 
 BridgeStore.__onDispatch = function(payload) {
@@ -19,7 +24,10 @@ BridgeStore.__onDispatch = function(payload) {
       resetAllBridges(payload.bridges);
       BridgeStore.__emitChange();
       break;
-
+    case BridgeConstants.SINGLE_BRIDGE_RECEIVED:
+      resetSingleBridge(payload.bridge);
+      BridgeStore.__emitChange();
+      break;
   }
 };
 

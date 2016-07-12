@@ -7,5 +7,12 @@ module.exports = {
       actionType: BridgeConstants.BRIDGES_RECEIVED,
       bridges: bridges
     });
+  },
+
+  receiveSingleBridge: function(bridge) {
+    AppDispatcher.dispatcher({
+      actionType: BridgeConstants.SINGLE_BRIDGE_RECEIVED,
+      bridge: bridge,
+    });
   }
 };

@@ -6,14 +6,14 @@ var BridgeIndexItem = require('./bridge_index_item');
 var BridgeIndex = React.createClass({
 
   render: function() {
-    var bridgeKeys = Object.keys(this.props.bridges);
+    var bridgeIds = Object.keys(this.props.bridges);
     var bridges = this.props.bridges;
     return (
       <div className="bridge-index">
         {
-          bridgeKeys.map(function(key) {
-            var bridge = bridges[key];
-            return <BridgeIndexItem key={bridge.id} bridge={bridge} />;
+          bridgeIds.map(function(id) {
+            var bridge = bridges[id];
+            return <BridgeIndexItem key={id} bridge={bridge} />;
           })
         }
       </div>

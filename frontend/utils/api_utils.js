@@ -9,5 +9,14 @@ module.exports = {
         ServerActions.receiveBridges(bridges);
       }
     });
+  },
+
+  createBridge: function(bridge) {
+    $.ajax({
+      type: 'POST',
+      url: 'api/bridges',
+      data: {bridge: bridge},
+      success: ServerActions.receiveSingleBridge(bridge)
+    });
   }
 };

@@ -1,4 +1,5 @@
 var React = require('react');
+var ClientActions = require('../../actions/client_actions');
 var FormGroup = require('react-bootstrap').FormGroup;
 var ControlLabel = require('react-bootstrap').ControlLabel;
 var FormControl = require('react-bootstrap').FormControl;
@@ -9,11 +10,11 @@ var NewBridgeForm = React.createClass({
 
   getInitialState: function() {
     return {
-      title: '', description: '', lat: '', lng: ''
+      title: '', description: ''
     };
   },
 
-  getTitleValidationState: function() {
+  getValidationState: function() {
     var length = this.state.title.length;
     if (length > 6) return 'success';
     else if (length > 0) return 'error';
@@ -27,54 +28,50 @@ var NewBridgeForm = React.createClass({
     this.setState({ description: e.target.value });
   },
 
-  handleLatChange: function(e) {
-    this.setState({lat: e.target.value});
-  },
-
-  handleLngChange: function(e) {
-    this.setState({lng: e.target.value});
-  },
-
   handleSubmit: function() {
-    console.log('submitted');
+    var bridgeData = {
+      title: this.state.title,
+      description: this.state.description,
+      lat: this.props.coords.lat(),
+      lng: this.props.coords.lng()
+    };
+
+    ClientActions.createBridge(bridgeData);
   },
 
   render: function () {
-    var lat = this.state.lat === '' ? this.props.coords.lat() : this.state.lat;
-    var lng = this.state.lng === '' ? this.props.coords.lng() : this.state.lng;
 
     return (
       <form onSubmit={this.handleSubmit}>
         <div id='street-view'></div>
         <FormGroup
           controlId="formBasicText"
-          validationState={this.getTitleValidationState()}>
+          validationState={this.getValidationState()}>
 
           <ControlLabel>Bridge Title</ControlLabel>
           <FormControl
             placeholder="e.g. Market Street over Schuylkill River"
             onChange={this.handleTitleChange}/>
           <FormControl.Feedback />
-
-          <br/>
-          <ControlLabel>Bridge Description</ControlLabel>
-          <FormControl
-            componentClass="textarea"
-            placeholder="e.g. three-span continuous, steel-girder"
-            onChange={this.handleDescriptionChange}/>
-
-          <br/>
-          <ControlLabel>Latitude</ControlLabel>
-          <FormControl value={lat} onChange={this.handleLatChange}/>
-
-          <br/>
-          <ControlLabel>Longitude</ControlLabel>
-          <FormControl value={lng} onChange={this.handleLngChange}/>
-          <hr/>
-
-          <Button type="submit">Submit Bridge</Button>
-
         </FormGroup>
+
+        <br/>
+        <ControlLabel>Bridge Description</ControlLabel>
+        <FormControl
+          componentClass="textarea"
+          placeholder="e.g. three-span continuous, steel-girder"
+          onChange={this.handleDescriptionChange}/>
+        <br/>
+        <ControlLabel>Latitude</ControlLabel>
+        <FormControl value={this.props.coords.lat()} disabled='true'/>
+
+        <br/>
+        <ControlLabel>Longitude</ControlLabel>
+        <FormControl value={this.props.coords.lng()} disabled='true'/>
+
+        <hr/>
+        <Button type="submit">Submit Bridge</Button>
+
       </form>
     );
   }
