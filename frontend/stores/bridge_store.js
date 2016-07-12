@@ -10,7 +10,6 @@ BridgeStore.all = function () {
 };
 
 function resetAllBridges (bridges) {
-  console.log(bridges);
   _bridges = bridges;
 }
 

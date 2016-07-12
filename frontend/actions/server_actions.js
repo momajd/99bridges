@@ -10,7 +10,7 @@ module.exports = {
   },
 
   receiveSingleBridge: function(bridge) {
-    AppDispatcher.dispatcher({
+    AppDispatcher.dispatch({
       actionType: BridgeConstants.SINGLE_BRIDGE_RECEIVED,
       bridge: bridge,
     });

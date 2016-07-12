@@ -16,7 +16,9 @@ module.exports = {
       type: 'POST',
       url: 'api/bridges',
       data: {bridge: bridge},
-      success: ServerActions.receiveSingleBridge(bridge)
+      success: function(bridge) {
+        ServerActions.receiveSingleBridge(bridge);
+      }
     });
   }
 };

@@ -33,10 +33,17 @@ var BridgeMap = React.createClass({
 
     // Open form for new bridge when map is clicked
     google.maps.event.addListener(this.map, 'click', function(e) {
-      if (self.infoWindowIsOpen) {return;}
+      if (self.infoWindowIsOpen) return;
       self.newBridgeCoords = e.latLng;
       self.openModal();
     });
+
+    //Close modal when form for new bridge has been submitted
+    document.addEventListener('submit', this.closeModal);
+  },
+
+  componentWillUnmount: function() {
+    document.removeEventListener('submit', this.closeModal);
   },
 
   componentDidUpdate: function() {
