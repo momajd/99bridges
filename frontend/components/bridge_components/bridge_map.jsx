@@ -10,7 +10,7 @@ var NewBridgeForm = require('./bridge_form');
 var BridgeMap = React.createClass({
 
   getInitialState: function() {
-    return ({ showModal: false})
+    return { showModal: false}
   },
 
   closeModal: function() {
@@ -125,8 +125,32 @@ var BridgeMap = React.createClass({
       }
     });
 
+    this.createInfoWindow(bridge, marker);
+    this.createMarkerHoverEffects();
+    this.markers[bridge.id] = marker;
+  },
+
+  createInfoWindow: function (bridge, marker) {
+    var bridgeId = bridge.id;
     var infoWindow = new google.maps.InfoWindow({
-      content: '<h3>' + bridge.title + '</h3>'
+      content: '<h3>' + bridge.title + '</h3>' + '<div class=street-view id='+ bridgeId + '></div>'
+    });
+
+    var pano = null;
+    google.maps.event.addListener(infoWindow, 'domready', function () {
+        if (pano != null) {
+            pano.unbind("position");
+            pano.setVisible(false);
+        }
+        pano = new google.maps.StreetViewPanorama(document.getElementById(bridgeId), {
+            navigationControl: true,
+            navigationControlOptions: { style: google.maps.NavigationControlStyle.ANDROID },
+            enableCloseButton: false,
+            addressControl: false,
+            linksControl: false
+        });
+        pano.bindTo("position", marker);
+        pano.setVisible(true);
     });
 
     var self = this;
@@ -140,9 +164,6 @@ var BridgeMap = React.createClass({
       infoWindow.close();
       self.infoWindowIsOpen = false;
     });
-
-    this.createMarkerHoverEffects();
-    this.markers[bridge.id] = marker;
   },
 
   removeMarker: function (marker) {
