@@ -32,9 +32,10 @@ var BridgeMap = React.createClass({
       ClientActions.fetchAllBridges(bounds);
     });
 
+    // Open form for new bridge when map is clicked
     google.maps.event.addListener(this.map, 'click', function(e) {
-      // don't open modal if an info-window is open
-      if (window.infoWindowIsOpen) {return;}
+      if (self.infoWindowIsOpen) {return;}
+      self.newBridgeCoords = e.latLng;
       self.openModal();
     });
   },
@@ -131,12 +132,13 @@ var BridgeMap = React.createClass({
     var self = this;
     google.maps.event.addListener(marker, 'click', function() {
       infoWindow.open(self.map, marker);
-      window.infoWindowIsOpen = true;
+      self.infoWindowIsOpen = true; //this is for opening the modal form for a
+      // new bridge. If exiting out of an infowindow, don't open the modal
     });
 
     google.maps.event.addListener(this.map, 'click', function() {
       infoWindow.close();
-      window.infoWindowIsOpen = false;
+      self.infoWindowIsOpen = false;
     });
 
     this.createMarkerHoverEffects();
@@ -174,12 +176,8 @@ var BridgeMap = React.createClass({
             <Modal.Title>Create a New Bridge</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-
-            <NewBridgeForm />
+            <NewBridgeForm coords={this.newBridgeCoords}/>
           </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={this.closeModal}>Close</Button>
-          </Modal.Footer>
         </Modal>
       </div>
     );

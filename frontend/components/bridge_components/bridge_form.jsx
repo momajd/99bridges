@@ -3,6 +3,7 @@ var FormGroup = require('react-bootstrap').FormGroup;
 var ControlLabel = require('react-bootstrap').ControlLabel;
 var FormControl = require('react-bootstrap').FormControl;
 var HelpBlock = require('react-bootstrap').HelpBlock;
+var Button = require('react-bootstrap').Button;
 
 var NewBridgeForm = React.createClass({
 
@@ -27,7 +28,7 @@ var NewBridgeForm = React.createClass({
   },
 
   render: function () {
-
+    console.log(this.props.coords);
     return (
       <form>
         <FormGroup
@@ -46,8 +47,14 @@ var NewBridgeForm = React.createClass({
           <ControlLabel>Bridge Description</ControlLabel>
           <FormControl
             type="text"
+            componentClass="textarea"
             placeholder="e.g. three-span continuous, steel-girder"
             onChange={this.handleDescriptionChange}/>
+
+          <hr/>
+
+          <Button type="submit">Submit Bridge</Button>
+
         </FormGroup>
       </form>
     );
