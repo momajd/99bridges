@@ -16,8 +16,12 @@ var NewBridgeForm = React.createClass({
 
   getValidationState: function() {
     var length = this.state.title.length;
-    if (length > 6) return 'success';
+    if (length >= 6) return 'success';
     else if (length > 0) return 'error';
+  },
+
+  buttonIsDisabled: function() {
+    return this.getValidationState() !== 'success';
   },
 
   handleTitleChange: function(e) {
@@ -70,7 +74,9 @@ var NewBridgeForm = React.createClass({
         <FormControl value={this.props.coords.lng()} disabled='true'/>
 
         <hr/>
-        <Button type="submit">Submit Bridge</Button>
+        <Button type="submit" disabled={this.buttonIsDisabled()}>
+          Submit Bridge
+        </Button>
 
       </form>
     );
