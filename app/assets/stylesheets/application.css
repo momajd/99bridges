@@ -36,7 +36,7 @@
   height: 100%;
 }
 
-.search-container-right {
+.index-container {
   width: 40%;
   overflow: scroll;
 }
@@ -51,19 +51,10 @@
   border-radius: 5px;
   padding: 10px;
   margin: 5px;
+  cursor: pointer;
 }
 
 .street-view {
   height: 180px;
   width: 260px;
-}
-
-.show-page-map {
-  width: 700px;
-  height: 300px;
-}
-
-.show-page-pano {
-  width: 700px;
-  height: 300px;
 }

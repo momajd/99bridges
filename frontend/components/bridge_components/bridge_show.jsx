@@ -23,8 +23,6 @@ var BridgeShow = React.createClass({
     this.listener.remove();
   },
 
-  // TODO change map to undraggable??
-
   render: function() {
     return (
       <div className='bridge-show'>

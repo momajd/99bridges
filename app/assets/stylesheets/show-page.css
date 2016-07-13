@@ -1,0 +1,18 @@
+.bridge-show {
+  display: flex;
+  justify-content: space-between;
+}
+
+.show-page-map-container {
+  height: 93vh;
+}
+
+.show-page-map {
+  width: 700px;
+  height: 50%;
+}
+
+.show-page-pano {
+  width: 700px;
+  height: 50%;
+}

@@ -32,14 +32,14 @@ var ShowMap = React.createClass({
 
   placePanorama: function (latLng) {
     var mapDOMNode = document.getElementById('show-page-pano');
-    var panoOptions = {position: latLng}
+    var panoOptions = {position: latLng};
     var pano = new google.maps.StreetViewPanorama(mapDOMNode, panoOptions);
     this.map.setStreetView(pano);
   },
 
   render: function() {
     return (
-      <div>
+      <div className='show-page-map-container'>
         <div className='show-page-map' id='show-page-map'></div>
         <div className='show-page-pano' id='show-page-pano'></div>
       </div>

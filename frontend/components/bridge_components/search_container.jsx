@@ -28,7 +28,7 @@ var SearchContainer = React.createClass({
     return (
       <div className='search-container'>
         <IndexMap bridges={this.state.bridges}/>
-        <div className='search-container-right'>
+        <div className='index-container'>
           <BridgeIndex bridges={this.state.bridges}/>
         </div>
       </div>

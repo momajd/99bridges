@@ -5,7 +5,6 @@ var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 var IndexRoute = ReactRouter.IndexRoute;
 var hashHistory = ReactRouter.hashHistory;
-var browserHistory = ReactRouter.browserHistory;
 // Components
 var SearchContainer = require('./components/bridge_components/search_container');
 var Navbar = require('./components/navbar');
