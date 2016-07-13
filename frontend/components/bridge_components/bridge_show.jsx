@@ -1,7 +1,7 @@
 var React = require('react');
 var ClientActions = require('../../actions/client_actions');
 var BridgeStore = require('../../stores/bridge_store');
-var BridgeMap = require('./bridge_map');
+var ShowMap = require('./show_map');
 
 var BridgeShow = React.createClass({
   getInitialState: function() {
@@ -26,11 +26,10 @@ var BridgeShow = React.createClass({
   // TODO change map to undraggable??
 
   render: function() {
-    var bridges = {};
     return (
       <div className='bridge-show'>
         {this.state.bridge.title}
-        <BridgeMap bridges={bridges}/>
+        <ShowMap bridge={this.state.bridge}/>
       </div>
     );
   }

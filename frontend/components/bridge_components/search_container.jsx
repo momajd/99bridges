@@ -1,7 +1,7 @@
 var React = require('react');
 var BridgeStore = require('../../stores/bridge_store');
 var ClientActions = require('../../actions/client_actions');
-var BridgeMap = require('./bridge_map');
+var IndexMap = require('./index_map');
 var BridgeIndex = require('./bridge_index');
 var BridgeFormModal = require('./bridge_form');
 
@@ -16,14 +16,18 @@ var SearchContainer = React.createClass({
   },
 
   componentDidMount: function () {
-    BridgeStore.addListener(this.updateBridges);
+    this.listener = BridgeStore.addListener(this.updateBridges);
+  },
+
+  componentWillUnmount: function () {
+    this.listener.remove();
   },
 
   render: function() {
 
     return (
       <div className='search-container'>
-        <BridgeMap bridges={this.state.bridges}/>
+        <IndexMap bridges={this.state.bridges}/>
         <div className='search-container-right'>
           <BridgeIndex bridges={this.state.bridges}/>
         </div>

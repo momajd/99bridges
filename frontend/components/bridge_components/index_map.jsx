@@ -1,12 +1,13 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var hashHistory = require('react-router').hashHistory;
 var ClientActions = require('../../actions/client_actions');
 var BridgeFormModal = require('./bridge_form');
 var Modal = require('react-bootstrap').Modal;
 var Button = require('react-bootstrap').Button;
 var NewBridgeForm = require('./bridge_form');
 
-var BridgeMap = React.createClass({
+var IndexMap = React.createClass({
 
   getInitialState: function() {
     return { showModal: false}
@@ -62,7 +63,7 @@ var BridgeMap = React.createClass({
   },
 
   placeMap: function () {
-    var mapDOMNode = ReactDOM.findDOMNode(this.refs.map);
+    var mapDOMNode = document.getElementById('index-map');
     var mapOptions = {
       center: {lat: 37.7758, lng: -122.435}, // TODO update to user location
       zoom: 12,
@@ -118,8 +119,12 @@ var BridgeMap = React.createClass({
       bridgeId: bridge.id,
       icon: {
         url: 'http://maps.google.com/mapfiles/marker_purple.png'
-      }
+      },
+      url: "/bridges/" + bridge.id
     });
+    google.maps.event.addListener(marker, 'click', function() {
+      hashHistory.push(marker.url);
+    })
 
     this.createInfoWindow(bridge, marker);
     this.createMarkerHoverEffects();
@@ -129,9 +134,13 @@ var BridgeMap = React.createClass({
   createInfoWindow: function (bridge, marker) {
     var bridgeId = bridge.id;
     var infoWindow = new google.maps.InfoWindow({
-      content: '<h3>' + bridge.title + '</h3>' + '<div class=street-view id='+ bridgeId + '></div>'
+      content: (
+        `<h3> <a href=#/bridges/${bridge.id}> ${bridge.title} </a></h3>
+        <div class=street-view id=${bridge.id}></div>`
+      )
     });
-    marker.infoWindow = infoWindow; //keep a reference to each marker's infoWindow
+    //keep a reference to each marker's infoWindow (see createMarkerHoverEffects)
+    marker.infoWindow = infoWindow;
 
     // for street view
     var pano = null;
@@ -171,7 +180,7 @@ var BridgeMap = React.createClass({
 
     var self = this;
     for (let i=1; i <= index.length; i++) {
-      var indexItem = $('.bridge-index-item:nth-child('+i+')');
+      var indexItem = $(`.bridge-index-item:nth-child(${i})`);
       let bridgeId = indexItem[0].id;
 
       indexItem.hover(function(){
@@ -187,7 +196,7 @@ var BridgeMap = React.createClass({
   render: function () {
     return (
       <div className='map-container'>
-        <div className='map' ref='map'></div>
+        <div className='index-map' id='index-map'></div>
 
         <Modal show={this.state.showModal} onHide={this.closeModal}>
           <Modal.Header closeButton>
@@ -202,4 +211,4 @@ var BridgeMap = React.createClass({
   }
 });
 
-module.exports = BridgeMap;
+module.exports = IndexMap;
