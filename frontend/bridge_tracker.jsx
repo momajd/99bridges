@@ -30,7 +30,7 @@ var appRouter = (
   <Router history={hashHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={SearchContainer}/>
-      <Route path=":id" component={BridgeShow}/>
+      <Route path="bridges/:bridgeId" component={BridgeShow}/>
     </Route>
   </Router>
 );

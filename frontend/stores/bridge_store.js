@@ -9,6 +9,10 @@ BridgeStore.all = function () {
   return Object.assign({}, _bridges);
 };
 
+BridgeStore.find = function (id) {
+  return Object.assign({}, _bridges[id]);
+};
+
 function resetAllBridges (bridges) {
   _bridges = bridges;
 }

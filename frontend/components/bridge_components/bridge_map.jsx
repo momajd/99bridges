@@ -33,7 +33,6 @@ var BridgeMap = React.createClass({
 
     // Open form for new bridge when map is clicked
     google.maps.event.addListener(this.map, 'click', function(e) {
-      if (self.infoWindowIsOpen) return;
       self.newBridgeCoords = e.latLng;
       self.openModal();
     });
@@ -52,8 +51,6 @@ var BridgeMap = React.createClass({
 
   getMapBounds: function() {
   // return object to be parsed by backend API
-  // https://developers.google.com/maps/documentation/javascript/reference#LatLngBounds
-
     var latLngBoundsObj = this.map.getBounds();
     var northEast = latLngBoundsObj.getNorthEast();
     var southWest = latLngBoundsObj.getSouthWest();
@@ -134,6 +131,7 @@ var BridgeMap = React.createClass({
     var infoWindow = new google.maps.InfoWindow({
       content: '<h3>' + bridge.title + '</h3>' + '<div class=street-view id='+ bridgeId + '></div>'
     });
+    marker.infoWindow = infoWindow; //keep a reference to each marker's infoWindow
 
     // for street view
     var pano = null;
@@ -156,14 +154,10 @@ var BridgeMap = React.createClass({
     var self = this;
     google.maps.event.addListener(marker, 'mouseover', function() {
       infoWindow.open(self.map, marker);
-      self.infoWindowIsOpen = true; //this is for opening the modal form for a
-      // new bridge. If exiting out of an infowindow, don't open the modal
-      // TODO Remove this variable if we keep 'mouseover' and 'mouseout'
     });
 
-    google.maps.event.addListener(marker, 'mouseout', function() {
+    google.maps.event.addListener(this.map, 'mousemove', function() {
       infoWindow.close();
-      self.infoWindowIsOpen = false;
     });
   },
 
@@ -179,10 +173,13 @@ var BridgeMap = React.createClass({
     for (let i=1; i <= index.length; i++) {
       var indexItem = $('.bridge-index-item:nth-child('+i+')');
       let bridgeId = indexItem[0].id;
+
       indexItem.hover(function(){
         self.markers[bridgeId].setAnimation(google.maps.Animation.BOUNCE);
+        self.markers[bridgeId].infoWindow.open(self.map, self.markers[bridgeId])
       }, function() {
         self.markers[bridgeId].setAnimation(null);
+        self.markers[bridgeId].infoWindow.close();
       });
     }
   },
@@ -206,16 +203,3 @@ var BridgeMap = React.createClass({
 });
 
 module.exports = BridgeMap;
-
-// TODO: OPEN A INFOWINDOW WITHOUT A MARKER. DELETE IF NOT USED
-// google.maps.event.addListener(this.map, 'click', function (e) {
-//   var position = e.latLng;
-//   var myLatLng = new google.maps.LatLng({lat: -34, lng: 151});
-//
-//   var infoWindow = new google.maps.InfoWindow({
-//     content: 'testing..'
-//   });
-//
-//   infoWindow.setPosition(position);
-//   infoWindow.open(self.map)
-// });

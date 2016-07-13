@@ -11,6 +11,15 @@ module.exports = {
     });
   },
 
+  fetchSingleBridge: function (bridgeId) {
+    $.ajax({
+      url: 'api/bridges/' + bridgeId,
+      success: function (bridge) {
+        ServerActions.receiveSingleBridge(bridge);
+      }
+    });
+  },
+
   createBridge: function(bridge) {
     $.ajax({
       type: 'POST',
