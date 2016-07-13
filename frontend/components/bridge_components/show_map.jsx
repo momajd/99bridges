@@ -17,7 +17,6 @@ var ShowMap = React.createClass({
     this.map = new google.maps.Map(mapDOMNode, mapOptions);
     this.placeMarker(latLng);
     this.placePanorama(latLng);
-    window.map = this.map;
   },
 
   placeMarker: function (latLng) {
@@ -26,13 +25,13 @@ var ShowMap = React.createClass({
       map: this.map,
       icon: {
         url: 'http://maps.google.com/mapfiles/marker_purple.png'
-      },
+      }
     });
   },
 
   placePanorama: function (latLng) {
     var mapDOMNode = document.getElementById('show-page-pano');
-    var panoOptions = {position: latLng};
+    var panoOptions = {position: latLng, clickToGo: true};
     var pano = new google.maps.StreetViewPanorama(mapDOMNode, panoOptions);
     this.map.setStreetView(pano);
   },

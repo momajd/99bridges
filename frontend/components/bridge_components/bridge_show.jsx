@@ -2,6 +2,7 @@ var React = require('react');
 var ClientActions = require('../../actions/client_actions');
 var BridgeStore = require('../../stores/bridge_store');
 var ShowMap = require('./show_map');
+var BridgeInfo = require('./bridge_info');
 
 var BridgeShow = React.createClass({
   getInitialState: function() {
@@ -26,7 +27,7 @@ var BridgeShow = React.createClass({
   render: function() {
     return (
       <div className='bridge-show'>
-        {this.state.bridge.title}
+        <BridgeInfo bridge={this.state.bridge}/>
         <ShowMap bridge={this.state.bridge}/>
       </div>
     );
