@@ -11,7 +11,6 @@ var BridgeInfo = React.createClass({
 
   render: function() {
     var bridge = this.props.bridge;
-    console.log(bridge);
 
     return (
       <div className='show-page-info'>

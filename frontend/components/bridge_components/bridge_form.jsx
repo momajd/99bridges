@@ -67,7 +67,6 @@ var NewBridgeForm = React.createClass({
         <br/>
         <ControlLabel>Bridge Description</ControlLabel>
         <FormControl
-          componentClass="textarea"
           placeholder="e.g. three-span continuous, steel-girder"
           onChange={this.handleDescriptionChange}/>
         <br/>
