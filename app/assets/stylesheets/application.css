@@ -48,9 +48,11 @@
 .bridge-index-item {
   background-color: #F0F0EB;
   border-radius: 5px;
+  height: 100px;
   padding: 10px;
   margin: 18px 30px 18px 30px;
   cursor: pointer;
+  overflow: hidden;
   box-shadow: 6px 6px 8px grey;
   -webkit-transition-duration: 0.5s;
   transition-duration: 0.5s;
@@ -59,6 +61,15 @@
 .bridge-index-item:hover {
   background-color: lightblue;
   color: white;
+}
+
+.bridge-index-item h3 {
+  margin-top: 10px;
+}
+
+.bridge-index-item img {
+  height: 100%;
+  float: right;
 }
 
 .street-view {

@@ -10,7 +10,7 @@ var NewBridgeForm = React.createClass({
 
   getInitialState: function() {
     return {
-      title: '', description: ''
+      title: '', description: '', imageUrl: ''
     };
   },
 
@@ -32,12 +32,17 @@ var NewBridgeForm = React.createClass({
     this.setState({ description: e.target.value });
   },
 
+  handleImageUrlChange: function(e) {
+    this.setState({imageUrl: e.target.value});
+  },
+
   handleSubmit: function() {
     var bridgeData = {
       title: this.state.title,
       description: this.state.description,
       lat: this.props.coords.lat(),
-      lng: this.props.coords.lng()
+      lng: this.props.coords.lng(),
+      img_url: this.state.imageUrl
     };
 
     ClientActions.createBridge(bridgeData);
@@ -72,6 +77,10 @@ var NewBridgeForm = React.createClass({
         <br/>
         <ControlLabel>Longitude</ControlLabel>
         <FormControl value={this.props.coords.lng()} disabled='true'/>
+
+        <br/>
+        <ControlLabel>Image Url</ControlLabel>
+        <FormControl onChange={this.handleImageUrlChange}/>
 
         <hr/>
         <Button type="submit" disabled={this.buttonIsDisabled()}>

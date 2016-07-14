@@ -1,5 +1,6 @@
 var React = require('react');
 var hashHistory = require('react-router').hashHistory;
+var Image = require('react-bootstrap').Image;
 
 var BridgeIndexItem = React.createClass({
   handleClick: function () {
@@ -13,8 +14,12 @@ var BridgeIndexItem = React.createClass({
         id={this.props.bridge.id}
         onClick={this.handleClick}>
 
-        <h3>{this.props.bridge.title}</h3>
-        {this.props.bridge.description}
+        <Image src={this.props.bridge.img_url} rounded responsive/>
+        <div>
+          <h3>{this.props.bridge.title}</h3>
+          {this.props.bridge.description}
+        </div>
+
       </div>
     );
   }
