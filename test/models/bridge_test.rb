@@ -6,9 +6,10 @@
 #  title       :string           not null
 #  description :string
 #  lat         :float            not null
-#  long        :float            not null
+#  lng         :float            not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  img_url     :string
 #
 
 require 'test_helper'

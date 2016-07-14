@@ -4,6 +4,7 @@ var ClientActions = require('../../actions/client_actions');
 var BridgeIndexItem = require('./bridge_index_item');
 
 var BridgeIndex = React.createClass({
+  // TODO add message to click on map if no bridges are present
 
   render: function() {
     var bridgeIds = Object.keys(this.props.bridges);

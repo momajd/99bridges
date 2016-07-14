@@ -12,6 +12,7 @@ var BridgeInfo = React.createClass({
   render: function() {
     var bridge = this.props.bridge;
 
+    // TODO add collapsable table for additional input
     return (
       <div className='show-page-info'>
         <PageHeader>

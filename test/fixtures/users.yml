@@ -1,15 +1,13 @@
 # == Schema Information
 #
-# Table name: bridges
+# Table name: users
 #
-#  id          :integer          not null, primary key
-#  title       :string           not null
-#  description :string
-#  lat         :float            not null
-#  lng         :float            not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  img_url     :string
+#  id              :integer          not null, primary key
+#  username        :string           not null
+#  password_digest :string           not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  session_token   :string           not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
