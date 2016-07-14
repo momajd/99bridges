@@ -10,6 +10,7 @@
 
 .show-page-map-container {
   height: 93vh;
+  width: 50%;
 }
 
 .show-page-map {
@@ -20,4 +21,9 @@
 .show-page-pano {
   width: 700px;
   height: 50%;
+}
+
+.show-page-info img {
+  width: 250px;
+  margin-bottom: 20px;
 }

@@ -2,6 +2,7 @@
 
 .navbar {
   margin-bottom: 0;
+  height: 6.5vh; /*the search container is 93.5*/
 }
 
 .control-label {

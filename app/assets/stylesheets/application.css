@@ -19,10 +19,10 @@
    width: 100%;
  }
 
-/*TODO need better way to adjust height*/
+/*TODO verify height is good on other screen size*/
  .search-container {
    width: 100%;
-   height: 93vh;
+   height: 93.5vh;
    display: flex;
  }
 
@@ -52,7 +52,7 @@
   margin: 18px 30px 18px 30px;
   cursor: pointer;
   box-shadow: 6px 6px 8px grey;
-  -webkit-transition-duration: 0.4s;
+  -webkit-transition-duration: 0.5s;
   transition-duration: 0.5s;
 }
 
