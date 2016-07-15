@@ -12,6 +12,7 @@ var BridgeShow = require('./components/bridge_components/bridge_show');
 
 // TODO remove after testing
 window.BridgeStore = require('./stores/bridge_store');
+window.SessionStore = require('./stores/session_store');
 window.ClientActions = require('./actions/client_actions');
 window.SessionUtils = require('./utils/session_api_util');
 
