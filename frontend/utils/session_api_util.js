@@ -8,22 +8,30 @@ module.exports = {
       data: {user: user},
       success: function(userData) {
         ServerActions.loginUser(userData);
+      },
+      error: function(response) {
+        var errors = response.responseJSON;
+        console.log(errors);
+        ServerActions.receiveErrors(errors);
       }
     });
   },
 
-  logIn: function(user) {
+  login: function(user) {
     $.ajax({
       type: 'POST',
       url: 'api/session',
       data: {user: user},
       success: function(userData) {
         ServerActions.loginUser(userData);
+      },
+      error: function(response) {
+        console.log(response.responseJSON);
       }
     });
   },
 
-  logOut: function() {
+  logout: function() {
     $.ajax({
       type: 'DELETE',
       url: 'api/session',

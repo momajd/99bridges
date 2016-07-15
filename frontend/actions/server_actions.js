@@ -29,5 +29,11 @@ module.exports = {
       actionType: SessionConstants.USER_LOGOUT,
       user: user
     });
+  },
+
+  receiveErrors: function(errors) {
+    AppDispatcher.dispatch({
+      // actionType:
+    });
   }
 };
