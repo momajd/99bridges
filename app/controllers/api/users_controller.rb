@@ -6,9 +6,9 @@ class Api::UsersController < ApplicationController
       login!(@user)
       render :show
     else
-      debugger
       @errors = @user.errors.full_messages
-      render 'api/shared/errors', status: 422
+      # render 'api/shared/errors', status: 422
+      render json: @user.errors.full_messages, status: 422
     end
   end
 

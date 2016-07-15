@@ -10,7 +10,7 @@ class Api::SessionsController < ApplicationController
       login!(@user)
       render 'api/users/show'
     else
-      render json: 'Invalid username or password', status: 401
+      render json: {error: ['Invalid username or password']}, status: 401
     end
   end
 
@@ -21,7 +21,7 @@ class Api::SessionsController < ApplicationController
       # render 'api/users/show'
       render json: {} #TODO verify that this is ok
     else
-      render json: 'No one is logged in', status: 404
+      render json: {error: ['No one is logged in']}, status: 404
     end
   end
 end
