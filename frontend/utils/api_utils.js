@@ -29,5 +29,5 @@ module.exports = {
         ServerActions.receiveSingleBridge(bridge);
       }
     });
-  }
+  },
 };
