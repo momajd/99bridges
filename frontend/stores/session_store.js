@@ -4,12 +4,30 @@ var SessionConstants = require('../constants/session_constants');
 
 var SessionStore = new Store(AppDispatcher);
 
+var _currentUser = {};
+
+var _login = function (user) {
+  _currentUser = user;
+};
+
+var _logout = function () {
+  _currentUser = {};
+};
+
+SessionStore.current_user = function () {
+  return Object.assign({}, _currentUser);
+};
+
 SessionStore.__onDispatch = function(payload) {
   switch (payload.actionType) {
     case SessionConstants.USER_LOGIN:
-      console.log('success');
+      _login(payload.user);
+      SessionStore.__emitChange();
       break;
-
+    case SessionConstants.USER_LOGOUT:
+      _logout();
+      SessionStore.__emitChange();
+      break;
   }
 };
 
