@@ -48,7 +48,7 @@
 .bridge-index-item {
   background-color: #F0F0EB;
   border-radius: 5px;
-  height: 100px;
+  min-height: 100px;
   padding: 10px;
   margin: 18px 30px 18px 30px;
   cursor: pointer;
@@ -68,7 +68,7 @@
 }
 
 .bridge-index-item img {
-  height: 100%;
+  height: 80px;
   float: right;
 }
 
