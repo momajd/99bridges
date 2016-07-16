@@ -9,6 +9,8 @@ var hashHistory = ReactRouter.hashHistory;
 var SearchContainer = require('./components/bridge_components/search_container');
 var Navbar = require('./components/navbar');
 var BridgeShow = require('./components/bridge_components/bridge_show');
+// Actions
+var ServerActions = require('./actions/server_actions');
 
 // TODO remove after testing
 window.BridgeStore = require('./stores/bridge_store');
@@ -38,5 +40,6 @@ var appRouter = (
 );
 
 document.addEventListener("DOMContentLoaded", function() {
+  if (window.currentUser) {ServerActions.receiveCurrentUser(window.currentUser)};
   ReactDOM.render(appRouter, document.getElementById('content'));
 });

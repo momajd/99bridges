@@ -18,7 +18,7 @@ module.exports = {
     });
   },
 
-  loginUser: function(user) {
+  receiveCurrentUser: function(user) {
     AppDispatcher.dispatch({
       actionType: SessionConstants.USER_LOGIN,
       user: user
@@ -33,7 +33,6 @@ module.exports = {
   },
 
   receiveErrors: function(errors) {
-    console.log('server actions')
     AppDispatcher.dispatch({
       actionType: ErrorConstants.ERRORS_RECEIVED,
       errors: errors

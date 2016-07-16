@@ -14,7 +14,7 @@ var _logout = function () {
   _currentUser = {};
 };
 
-SessionStore.current_user = function () {
+SessionStore.currentUser = function () {
   return Object.assign({}, _currentUser);
 };
 

@@ -15,7 +15,6 @@ ErrorStore.errors = function () {
 };
 
 ErrorStore.__onDispatch = function (payload) {
-  console.log('error store received dispatch');
   switch (payload.actionType) {
     case ErrorConstants.ERRORS_RECEIVED:
       setErrors(payload.errors);

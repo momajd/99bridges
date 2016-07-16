@@ -22,7 +22,7 @@ module.exports = {
       url: 'api/session',
       data: {user: user},
       success: function(userData) {
-        ServerActions.loginUser(userData);
+        ServerActions.receiveCurrentUser(userData);
       },
       error: function(xhrObject) {
         var errors = xhrObject.responseJSON;
