@@ -9,9 +9,8 @@ module.exports = {
       success: function(userData) {
         ServerActions.loginUser(userData);
       },
-      error: function(response) {
-        var errors = response.responseJSON;
-        console.log(errors);
+      error: function(xhrObject) {
+        var errors = xhrObject.responseJSON;
         ServerActions.receiveErrors(errors);
       }
     });
@@ -25,8 +24,9 @@ module.exports = {
       success: function(userData) {
         ServerActions.loginUser(userData);
       },
-      error: function(response) {
-        console.log(response.responseJSON);
+      error: function(xhrObject) {
+        var errors = xhrObject.responseJSON;
+        ServerActions.receiveErrors(errors);
       }
     });
   },
