@@ -24,7 +24,9 @@ var Errors = React.createClass({
       return <div key={i}>{error}</div>;
     });
     return (
-      <div>{errors}</div>
+      <div>
+        {errors}
+      </div>
     );
   }
 

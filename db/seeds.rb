@@ -17,3 +17,8 @@ bridge = Bridge.create([
   {title: "Some random bridge", description: "wtf", lat: 37.781391, lng: -122.397874},
   {title: "Little guy", description: "roflmfao", lat: 37.787307, lng: -122.395858}
 ])
+
+users = User.create([
+  {username: "Guest", password: "password"},
+  {username: "Mo", password: "password"}
+  ])

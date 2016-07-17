@@ -42,6 +42,11 @@ var LoginForm = React.createClass({
     ClientActions.login(user);
   },
 
+  handleDemo: function() {
+    var user = {username: "Guest", password: "password"};
+    ClientActions.login(user);
+  },
+
   render: function() {
     return (
       <NavItem onClick={this.open}>
@@ -71,8 +76,11 @@ var LoginForm = React.createClass({
                 <Button type="submit">
                   Login
                 </Button>
+                <br/>
               </form>
-
+              <Button onClick={this.handleDemo}>
+                Demo Account
+              </Button>
             </Modal.Body>
           </Modal>
 
