@@ -18,6 +18,10 @@ SessionStore.currentUser = function () {
   return Object.assign({}, _currentUser);
 };
 
+SessionStore.isUserLoggedIn = function () {
+  return Boolean(_currentUser.id);
+};
+
 SessionStore.__onDispatch = function(payload) {
   switch (payload.actionType) {
     case SessionConstants.USER_LOGIN:

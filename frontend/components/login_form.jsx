@@ -1,6 +1,7 @@
 var React = require('react');
 var ClientActions = require('../actions/client_actions');
-var ErrorStore = require('../stores/error_store');
+var Errors = require('../components/errors');
+var SessionStore = require('../stores/session_store');
 var NavItem = require('react-bootstrap').NavItem;
 var Modal = require('react-bootstrap').Modal;
 var FormControl = require('react-bootstrap').FormControl;
@@ -10,6 +11,14 @@ var LoginForm = React.createClass({
 
   getInitialState: function() {
     return {showModal: false, username: '', password: ''};
+  },
+
+  componentDidMount: function() {
+    this.listener = SessionStore.addListener(this.close);
+  },
+
+  componentWillUnmount: function() {
+    this.listener.remove();
   },
 
   close: function() {
@@ -31,7 +40,6 @@ var LoginForm = React.createClass({
   handleSubmit: function() {
     var user = {username: this.state.username, password: this.state.password};
     ClientActions.login(user);
-    this.close();
   },
 
   render: function() {
@@ -58,6 +66,7 @@ var LoginForm = React.createClass({
                   onChange={this.handlePasswordChange}>
                 </FormControl>
                 <hr/>
+                <Errors/>
 
                 <Button type="submit">
                   Login

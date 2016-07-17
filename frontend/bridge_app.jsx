@@ -11,6 +11,8 @@ var Navbar = require('./components/navbar');
 var BridgeShow = require('./components/bridge_components/bridge_show');
 // Actions
 var ServerActions = require('./actions/server_actions');
+// Stores
+var SessionStore = require('./stores/session_store');
 
 // TODO remove after testing
 window.BridgeStore = require('./stores/bridge_store');
