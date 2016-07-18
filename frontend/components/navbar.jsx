@@ -1,4 +1,5 @@
 var React = require('react');
+var hashHistory = require('react-router').hashHistory;
 var SessionStore = require('../stores/session_store');
 var ClientActions = require('../actions/client_actions');
 var LoginForm = require('./login_form');
@@ -30,9 +31,12 @@ var Navigation = React.createClass({
 
   handleSelect: function(eventKey) {
     switch (eventKey) {
-      case 3.3:
+      case 1.1:
+        hashHistory.push('/users/' + this.state.currentUser.id);
+        break;
+      case 1.2:
         ClientActions.logout();
-        window.location = '#';
+        hashHistory.push('#');
         break;
     }
   },
@@ -41,11 +45,10 @@ var Navigation = React.createClass({
     var username = this.state.currentUser.username || "" ;
     var dropDown = (
       <Nav pullRight onSelect={this.handleSelect}>
-        <NavDropdown eventKey={3} title={username} id="basic-nav-dropdown">
-          <MenuItem eventKey={3.1}>Action</MenuItem>
-          <MenuItem eventKey={3.2}>Another action</MenuItem>
+        <NavDropdown eventKey={1} title={username} id="basic-nav-dropdown">
+          <MenuItem eventKey={1.1}>My Bridges</MenuItem>
           <MenuItem divider />
-          <MenuItem eventKey={3.3}>Logout</MenuItem>
+          <MenuItem eventKey={1.2}>Logout</MenuItem>
         </NavDropdown>
       </Nav>
     );

@@ -1,5 +1,6 @@
 var React = require('react');
 var ClientActions = require('../../actions/client_actions');
+var SessionStore = require('../../stores/session_store');
 var FormGroup = require('react-bootstrap').FormGroup;
 var ControlLabel = require('react-bootstrap').ControlLabel;
 var FormControl = require('react-bootstrap').FormControl;
@@ -36,13 +37,15 @@ var NewBridgeForm = React.createClass({
     this.setState({imageUrl: e.target.value});
   },
 
-  handleSubmit: function() {
+  handleSubmit: function(e) {
+    e.preventDefault();
     var bridgeData = {
       title: this.state.title,
       description: this.state.description,
       lat: this.props.coords.lat(),
       lng: this.props.coords.lng(),
-      img_url: this.state.imageUrl
+      img_url: this.state.imageUrl,
+      user_id: SessionStore.currentUser().id
     };
 
     ClientActions.createBridge(bridgeData);

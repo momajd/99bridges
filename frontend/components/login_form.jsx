@@ -37,7 +37,8 @@ var LoginForm = React.createClass({
     this.setState({ password: e.target.value });
   },
 
-  handleSubmit: function() {
+  handleSubmit: function(e) {
+    e.preventDefault();
     var user = {username: this.state.username, password: this.state.password};
     ClientActions.login(user);
   },

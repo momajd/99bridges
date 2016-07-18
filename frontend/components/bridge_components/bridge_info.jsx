@@ -3,9 +3,6 @@ var PageHeader = require('react-bootstrap').PageHeader;
 var ListGroup = require('react-bootstrap').ListGroup;
 var ListGroupItem = require('react-bootstrap').ListGroupItem;
 var Image = require('react-bootstrap').Image;
-var Col = require('react-bootstrap').Col;
-var Row = require('react-bootstrap').Row;
-var Grid = require('react-bootstrap').Grid;
 
 var BridgeInfo = React.createClass({
 

@@ -14,7 +14,7 @@
 
 class Bridge < ActiveRecord::Base
 
-  validates :title, :lat, :lng, presence: true
+  validates :title, :lat, :lng, :user_id, presence: true
   validates :title, length: {minimum: 6}
   validates :lat, :lng, numericality: true
 

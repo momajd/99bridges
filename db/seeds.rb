@@ -22,5 +22,5 @@ bridge = Bridge.create([
 
 users = User.create([
   {username: "Guest", password: "password"},
-  {username: "Mo", password: "password"}
+  {username: "Mo_Majd", password: "password"}
   ])

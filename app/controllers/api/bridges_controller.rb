@@ -22,6 +22,6 @@ class Api::BridgesController < ApplicationController
 
   private
   def bridge_params
-    params.require(:bridge).permit(:title, :description, :lat, :lng, :img_url)
+    params.require(:bridge).permit(:title, :description, :lat, :lng, :img_url, :user_id)
   end
 end
