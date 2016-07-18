@@ -5,6 +5,19 @@ var Panel = require('react-bootstrap').Panel;
 var UserBridges = React.createClass({
 
   render: function() {
+    var rows = this.props.user.bridges.map(function(bridge) {
+      var link = '#/bridges/' + bridge.id;
+      return (
+        <tr key={bridge.id}>
+          <td>{bridge.id}</td>
+          <td>{bridge.title}</td>
+          <td>{bridge.description}</td>
+          <td>TODO</td>
+          <td><a href={link}>Link</a></td>
+        </tr>
+      );
+    });
+
     return (
         <Panel collapsible defaultExpanded header="Created Bridges">
           <Table responsive title="testing">
@@ -18,27 +31,7 @@ var UserBridges = React.createClass({
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>Table cell</td>
-                <td>Table cell</td>
-                <td>Table cell</td>
-                <td>Table cell</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Table cell</td>
-                <td>Table cell</td>
-                <td>Table cell</td>
-                <td>Table cell</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Table cell</td>
-                <td>Table cell</td>
-                <td>Table cell</td>
-                <td>Table cell</td>
-              </tr>
+              {rows}
             </tbody>
           </Table>
         </Panel>
