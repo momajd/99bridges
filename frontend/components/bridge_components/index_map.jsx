@@ -3,14 +3,21 @@ var ReactDOM = require('react-dom');
 var hashHistory = require('react-router').hashHistory;
 var ClientActions = require('../../actions/client_actions');
 var BridgeFormModal = require('./bridge_form');
+var NewBridgeForm = require('./bridge_form');
+var SessionStore = require('../../stores/session_store');
 var Modal = require('react-bootstrap').Modal;
 var Button = require('react-bootstrap').Button;
-var NewBridgeForm = require('./bridge_form');
+var OverlayTrigger = require('react-bootstrap').OverlayTrigger;
+var Popover = require('react-bootstrap').Popover;
+
 
 var IndexMap = React.createClass({
 
   getInitialState: function() {
-    return { showModal: false}
+    return {
+      showModal: false,
+      mapIsClickable: (SessionStore.isUserLoggedIn() ? true : false)
+    }
   },
 
   closeModal: function() {
@@ -21,9 +28,15 @@ var IndexMap = React.createClass({
     this.setState({showModal: true});
   },
 
+  updateMapClickability: function() {
+    this.setState({mapIsClickable: (SessionStore.isUserLoggedIn() ? true : false)})
+  },
+
   componentDidMount: function() {
     this.placeMap();
     this.markers = {};
+
+    this.sessionListener = SessionStore.addListener(this.updateMapClickability);
 
     // fetch bridges after map location has been changed
     var self = this;
@@ -34,8 +47,10 @@ var IndexMap = React.createClass({
 
     // Open form for new bridge when map is clicked
     google.maps.event.addListener(this.map, 'click', function(e) {
-      self.newBridgeCoords = e.latLng;
-      self.openModal();
+      if (self.state.mapIsClickable) {
+        self.newBridgeCoords = e.latLng;
+        self.openModal();
+      }
     });
 
     //Close modal when form for new bridge has been submitted
@@ -44,6 +59,7 @@ var IndexMap = React.createClass({
 
   componentWillUnmount: function() {
     document.removeEventListener('submit', this.closeModal);
+    this.sessionListener.remove();
   },
 
   componentDidUpdate: function() {
@@ -194,19 +210,27 @@ var IndexMap = React.createClass({
   },
 
   render: function () {
-    return (
-      <div className='map-container'>
-        <div className='index-map' id='index-map'></div>
+    var popoverMessage = this.state.mapIsClickable ? (
+      'Click map to create a bridge') :
+      ('Sign in to create a bridge')
 
-        <Modal show={this.state.showModal} onHide={this.closeModal}>
-          <Modal.Header closeButton>
-            <Modal.Title>Create a New Bridge</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <NewBridgeForm coords={this.newBridgeCoords}/>
-          </Modal.Body>
-        </Modal>
-      </div>
+    return (
+      <OverlayTrigger placement="top"
+        overlay={<Popover id='popover'>{popoverMessage}</Popover>}>
+
+        <div className='map-container'>
+          <div className='index-map' id='index-map'></div>
+
+          <Modal show={this.state.showModal} onHide={this.closeModal}>
+            <Modal.Header closeButton>
+              <Modal.Title>Create a New Bridge</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <NewBridgeForm coords={this.newBridgeCoords}/>
+            </Modal.Body>
+          </Modal>
+        </div>
+      </OverlayTrigger>
     );
   }
 });

@@ -1,5 +1,4 @@
 var React = require('react');
-var hashHistory = require('react-router').hashHistory;
 var SessionStore = require('../stores/session_store');
 var ClientActions = require('../actions/client_actions');
 var LoginForm = require('./login_form');
