@@ -9,7 +9,6 @@ var Nav = require('react-bootstrap').Nav;
 var NavItem = require('react-bootstrap').NavItem;
 var NavDropdown = require('react-bootstrap').NavDropdown;
 var MenuItem = require('react-bootstrap').MenuItem;
-var FormControl = require('react-bootstrap').FormControl;
 
 var Navigation = React.createClass({
 
@@ -67,6 +66,7 @@ var Navigation = React.createClass({
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
+
         <Navbar.Collapse>
           {navRightItems}
         </Navbar.Collapse>

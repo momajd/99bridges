@@ -6,6 +6,10 @@
   border-radius: 0;
 }
 
+.navbar-right {
+  font-size: 16px;
+}
+
 .control-label {
   font-size: 16px;
 }

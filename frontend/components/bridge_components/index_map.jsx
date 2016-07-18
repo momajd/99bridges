@@ -34,8 +34,10 @@ var IndexMap = React.createClass({
 
     // Open form for new bridge when map is clicked
     google.maps.event.addListener(this.map, 'click', function(e) {
-      self.newBridgeCoords = e.latLng;
-      self.openModal();
+      if (window.mapIsActive) {
+        self.newBridgeCoords = e.latLng;
+        self.openModal();
+      }
     });
 
     //Close modal when form for new bridge has been submitted
