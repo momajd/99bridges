@@ -9,6 +9,7 @@ var hashHistory = ReactRouter.hashHistory;
 var SearchContainer = require('./components/bridge_components/search_container');
 var Navbar = require('./components/navbar');
 var BridgeShow = require('./components/bridge_components/bridge_show');
+var UserShow = require('./components/user_components/user_show');
 // Actions
 var ServerActions = require('./actions/server_actions');
 // Stores
@@ -37,9 +38,16 @@ var appRouter = (
     <Route path="/" component={App}>
       <IndexRoute component={SearchContainer}/>
       <Route path="bridges/:bridgeId" component={BridgeShow}/>
+      <Route path="users/:userId" component={UserShow} onEnter={_ensureLoggedIn}/>
     </Route>
   </Router>
 );
+
+function _ensureLoggedIn(nextState, replace) {
+    if (!SessionStore.isUserLoggedIn()) {
+      replace('#');
+    }
+}
 
 document.addEventListener("DOMContentLoaded", function() {
   if (window.currentUser) {ServerActions.receiveCurrentUser(window.currentUser)};
