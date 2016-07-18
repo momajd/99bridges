@@ -18,6 +18,8 @@ class Bridge < ActiveRecord::Base
   validates :title, length: {minimum: 6}
   validates :lat, :lng, numericality: true
 
+  belongs_to :user
+
   def self.in_bounds(bounds)
    # google map bounds will be in the following format:
    # {

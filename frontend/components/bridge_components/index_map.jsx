@@ -10,7 +10,6 @@ var Button = require('react-bootstrap').Button;
 var OverlayTrigger = require('react-bootstrap').OverlayTrigger;
 var Popover = require('react-bootstrap').Popover;
 
-
 var IndexMap = React.createClass({
 
   getInitialState: function() {
@@ -81,7 +80,7 @@ var IndexMap = React.createClass({
   placeMap: function () {
     var mapDOMNode = document.getElementById('index-map');
     var mapOptions = {
-      center: {lat: 37.7758, lng: -122.435}, // TODO update to user location
+      center: {lat: 37.7758, lng: -122.435}, //Default to SF
       zoom: 12,
     };
     this.map = new google.maps.Map(mapDOMNode, mapOptions);
@@ -236,3 +235,16 @@ var IndexMap = React.createClass({
 });
 
 module.exports = IndexMap;
+
+// TODO use to move map to user location
+// var geocoder = new google.maps.Geocoder;
+// var location
+//
+// var self = this;
+// geocoder.geocode({address: 'San Diego, CA'}, function(results, status) {
+//   console.log(arguments);
+//   if (status === "OK") {
+//     location = results[0].geometry.location;
+//     self.map.panTo(location);
+//   }
+// });
