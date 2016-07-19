@@ -24,5 +24,9 @@ module.exports = {
 
   logout: function (user) {
     SessionApiUtils.logout(user);
+  },
+
+  fetchUser: function (userId) {
+    ApiUtils.fetchUser(userId);
   }
 };

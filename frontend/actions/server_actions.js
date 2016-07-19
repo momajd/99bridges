@@ -2,6 +2,7 @@ var AppDispatcher = require('../dispatcher/dispatcher');
 var BridgeConstants = require('../constants/bridge_constants');
 var SessionConstants = require('../constants/session_constants');
 var ErrorConstants = require('../constants/error_constants');
+var UserConstants = require('../constants/user_constants');
 
 module.exports = {
   receiveBridges: function(bridges) {
@@ -37,5 +38,12 @@ module.exports = {
       actionType: ErrorConstants.ERRORS_RECEIVED,
       errors: errors
     });
-  }
+  },
+
+  receiveUser: function(user) {
+    AppDispatcher.dispatch({
+      actionType: UserConstants.USER_RECEIVED,
+      user: user
+    });
+  },
 };

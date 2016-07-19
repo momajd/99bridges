@@ -30,4 +30,13 @@ module.exports = {
       }
     });
   },
+
+  fetchUser: function (userId) {
+    $.ajax({
+      url: '/api/users/' + userId,
+      success: function(user) {
+        ServerActions.receiveUser(user);
+      }
+    });
+  }
 };

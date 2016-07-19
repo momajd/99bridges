@@ -27,7 +27,7 @@ var UserBridges = React.createClass({
                 <th>Title</th>
                 <th>Description</th>
                 <th>Additional Notes</th>
-                <th>Link</th>
+                <th>Profile</th>
               </tr>
             </thead>
             <tbody>
