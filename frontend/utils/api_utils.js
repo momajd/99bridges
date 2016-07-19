@@ -31,6 +31,17 @@ module.exports = {
     });
   },
 
+  updateBridge: function(bridge) {
+    $.ajax({
+      url: 'api/bridges/' + bridge.id,
+      type: 'PATCH',
+      data: {bridge: bridge},
+      success: function (bridgeData) {
+        ServerActions.receiveSingleBridge(bridgeData);
+      }
+    });
+  },
+
   fetchUser: function (userId) {
     $.ajax({
       url: '/api/users/' + userId,

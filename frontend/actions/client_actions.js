@@ -14,6 +14,10 @@ module.exports = {
     ApiUtils.createBridge(bridge);
   },
 
+  updateBridge: function (bridge) {
+    ApiUtils.updateBridge(bridge);
+  },
+
   signUp: function (user) {
     SessionApiUtils.signUp(user);
   },

@@ -20,8 +20,21 @@ class Api::BridgesController < ApplicationController
     render :show
   end
 
+  def update
+    @bridge = Bridge.find(params[:id])
+
+    if @bridge.update_attributes(bridge_params)
+      render :show
+    else
+      @errors = @bridge.errors.full_messages
+      render 'api/shared/errors', status: 422
+    end
+  end
+
   private
   def bridge_params
-    params.require(:bridge).permit(:title, :description, :lat, :lng, :img_url, :user_id)
+    params.require(:bridge).permit(:title, :description, :lat, :lng, :img_url,
+    :user_id, :condition, :spans, :superstructure_type, :substructure_type,
+    :year_built, :length, :width, :notes)
   end
 end
