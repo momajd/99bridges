@@ -31,13 +31,13 @@ var AdditionalInfoEdit = React.createClass({
       showModal: true,
       description: bridge.description,
       imageUrl: bridge.img_url,
-      spans: bridge.spans,
+      spans: bridge.spans || "",
       superstructureType: bridge.superstructure_type,
       substructureType: bridge.substructure_type,
       condition: bridge.condition,
-      yearBuilt: bridge.year_built,
-      length: bridge.length,
-      width: bridge.width,
+      yearBuilt: bridge.year_built || "",
+      length: bridge.length || "",
+      width: bridge.width || "",
       notes: bridge.notes
     });
   },
@@ -138,54 +138,54 @@ var AdditionalInfoEdit = React.createClass({
               </FormControl>
               <br/>
 
-              <ControlLabel>Superstructure Type:</ControlLabel>
-              <FormControl
-                value={this.state.superstructureType}
-                onChange={this.handleSuperstructureTypeChange}>
-              </FormControl>
-              <br/>
+                <ControlLabel>Superstructure Type:</ControlLabel>
+                <FormControl
+                  value={this.state.superstructureType}
+                  onChange={this.handleSuperstructureTypeChange}>
+                </FormControl>
+                <br/>
 
-              <ControlLabel>Substructure Type:</ControlLabel>
-              <FormControl
-                value={this.state.substructureType}
-                onChange={this.handleSubstructureTypeChange}>
-              </FormControl>
-              <br/>
+                <ControlLabel>Substructure Type:</ControlLabel>
+                <FormControl
+                  value={this.state.substructureType}
+                  onChange={this.handleSubstructureTypeChange}>
+                </FormControl>
+                <br/>
 
-              <ControlLabel>Condition:</ControlLabel>
-              <FormControl
-                value={this.state.condition}
-                onChange={this.handleConditionChange}>
-              </FormControl>
-              <br/>
+                <ControlLabel>Condition:</ControlLabel>
+                <FormControl
+                  value={this.state.condition}
+                  onChange={this.handleConditionChange}>
+                </FormControl>
+                <br/>
 
-              <ControlLabel>Year Built:</ControlLabel>
-              <FormControl
-                value={this.state.yearBuilt}
-                onChange={this.handleYearBuiltChange}>
-              </FormControl>
-              <br/>
+                <ControlLabel>Year Built:</ControlLabel>
+                <FormControl
+                  value={this.state.yearBuilt}
+                  onChange={this.handleYearBuiltChange}>
+                </FormControl>
+                <br/>
 
-              <ControlLabel>Total Length:</ControlLabel>
-              <FormControl
-                value={this.state.length}
-                onChange={this.handleLengthChange}>
-              </FormControl>
-              <br/>
+                <ControlLabel>Total Length:</ControlLabel>
+                <FormControl
+                  value={this.state.length}
+                  onChange={this.handleLengthChange}>
+                </FormControl>
+                <br/>
 
-              <ControlLabel>Width:</ControlLabel>
-              <FormControl
-                value={this.state.width}
-                onChange={this.handleWidthChange}>
-              </FormControl>
-              <br/>
+                <ControlLabel>Width:</ControlLabel>
+                <FormControl
+                  value={this.state.width}
+                  onChange={this.handleWidthChange}>
+                </FormControl>
+                <br/>
 
-              <ControlLabel>Additional Notes:</ControlLabel>
-              <FormControl
-                value={this.state.notes}
-                onChange={this.handleNotesChange}>
-              </FormControl>
-              <br/>
+                <ControlLabel>Additional Notes:</ControlLabel>
+                <FormControl
+                  value={this.state.notes}
+                  onChange={this.handleNotesChange}>
+                </FormControl>
+                <br/>
 
               <hr/>
               <Errors/>
