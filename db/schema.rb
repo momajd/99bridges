@@ -11,20 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160718171521) do
+ActiveRecord::Schema.define(version: 20160719153458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "bridges", force: :cascade do |t|
-    t.string   "title",       null: false
+    t.string   "title",               null: false
     t.string   "description"
-    t.float    "lat",         null: false
-    t.float    "lng",         null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.float    "lat",                 null: false
+    t.float    "lng",                 null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.string   "img_url"
     t.integer  "user_id"
+    t.string   "condition"
+    t.integer  "spans"
+    t.string   "superstructure_type"
+    t.string   "substructure_type"
+    t.integer  "year_built"
+    t.float    "length"
+    t.float    "width"
+    t.string   "notes"
   end
 
   add_index "bridges", ["user_id"], name: "index_bridges_on_user_id", using: :btree
@@ -35,6 +43,7 @@ ActiveRecord::Schema.define(version: 20160718171521) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "session_token",   null: false
+    t.string   "location"
   end
 
   add_index "users", ["session_token"], name: "index_users_on_session_token", unique: true, using: :btree

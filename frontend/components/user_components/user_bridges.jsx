@@ -23,7 +23,7 @@ var UserBridges = React.createClass({
 
     return (
         <Panel collapsible defaultExpanded header="Created Bridges">
-          <Table responsive title="testing">
+          <Table responsive>
             <thead>
               <tr>
                 <th>Bridge Id</th>

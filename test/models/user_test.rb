@@ -8,6 +8,7 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  session_token   :string           not null
+#  location        :string
 #
 
 require 'test_helper'

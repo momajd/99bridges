@@ -7,6 +7,8 @@
 #  password_digest :string           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  session_token   :string           not null
+#  location        :string
 #
 
 class User < ActiveRecord::Base

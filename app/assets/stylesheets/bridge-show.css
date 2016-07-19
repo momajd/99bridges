@@ -1,11 +1,13 @@
 .bridge-show {
   display: flex;
   justify-content: space-between;
+  height: 93vh;
 }
 
 .show-page-info {
   width: 100%;
   padding: 0px 60px 0px 60px;
+  overflow: scroll;
 }
 
 .show-page-map-container {
