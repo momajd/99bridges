@@ -10,8 +10,7 @@ class Api::BridgesController < ApplicationController
     if @bridge.save
       render :show
     else
-      @errors = @bridge.errors.full_messages
-      render 'api/shared/errors', status: 422
+      render json: @bridge.errors.full_messages, status: 422
     end
   end
 
@@ -26,8 +25,7 @@ class Api::BridgesController < ApplicationController
     if @bridge.update_attributes(bridge_params)
       render :show
     else
-      @errors = @bridge.errors.full_messages
-      render 'api/shared/errors', status: 422
+      render json: @bridge.errors.full_messages, status: 422
     end
   end
 

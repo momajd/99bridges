@@ -19,7 +19,7 @@ var AdditionalInfo = React.createClass({
     }
 
     return (
-      <Panel collapsible header="Additional Info">
+      <Panel collapsible defaultExpanded header="Additional Info">
         <Table responsive>
           <tbody>
             <tr>
@@ -56,7 +56,7 @@ var AdditionalInfo = React.createClass({
             </tr>
           </tbody>
         </Table>
-        
+
         {updateButton}
       </Panel>
     );

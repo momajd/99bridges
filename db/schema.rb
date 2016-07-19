@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160719153458) do
+ActiveRecord::Schema.define(version: 20160719203734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,14 @@ ActiveRecord::Schema.define(version: 20160719153458) do
   end
 
   add_index "bridges", ["user_id"], name: "index_bridges_on_user_id", using: :btree
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id",   null: false
+    t.integer "bridge_id", null: false
+  end
+
+  add_index "favorites", ["bridge_id"], name: "index_favorites_on_bridge_id", using: :btree
+  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "username",        null: false
