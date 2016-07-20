@@ -125,7 +125,6 @@ var IndexMap = React.createClass({
     return removeMarkers;
   },
 
-  // TODO: must add credit: Designed by Freepik and distributed by Flaticon
   createMarker: function (bridge) {
     var markerPos = {lat: bridge.lat, lng: bridge.lng};
     var marker = new google.maps.Marker({

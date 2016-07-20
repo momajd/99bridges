@@ -60,16 +60,21 @@
 
 .bridge-index-item:hover {
   background-color: lightblue;
-  color: white;
 }
 
 .bridge-index-item h3 {
-  margin-top: 10px;
+  margin-top: 8px;
+  font-size: 22px;
+}
+
+.bridge-index-item-info {
+  padding: 6px 6px 6px 24px;
 }
 
 .bridge-index-item img {
   height: 80px;
   float: right;
+  margin: 6px;
 }
 
 .street-view {

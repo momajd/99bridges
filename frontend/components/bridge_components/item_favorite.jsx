@@ -1,9 +1,27 @@
 var React = require('react');
 var SessionStore = require('../../stores/session_store');
 var ClientActions = require('../../actions/client_actions');
-
+var Button = require('react-bootstrap').Button;
+var Glyphicon = require('react-bootstrap').Glyphicon;
+// TODO include credit in readme http://glyphicons.com/
 
 var ItemFavoriteButton = React.createClass({
+
+  getInitialState: function() {
+    return {isUserLoggedIn: SessionStore.isUserLoggedIn()};
+  },
+
+  updateLoggedIn: function() {
+    this.setState({isUserLoggedIn: SessionStore.isUserLoggedIn()});
+  },
+
+  componentDidMount: function() {
+    this.listener = SessionStore.addListener(this.updateLoggedIn);
+  },
+
+  componentWillUnmount: function() {
+    this.listener.remove();
+  },
 
   isFavorite: function() {
     var bridge = this.props.bridge;
@@ -27,13 +45,17 @@ var ItemFavoriteButton = React.createClass({
   },
 
   render: function() {
-    var text = this.isFavorite() ? 'unsave' : 'save';
+    var glyph;
+    if (this.state.isUserLoggedIn) {
+      glyph = this.isFavorite() ? "star" : "star-empty";
+    }
 
     return (
-      <button onClick={this.toggleFavorite}>{text}</button>
+      <Glyphicon id="glyphicon" onClick={this.toggleFavorite} glyph={glyph} />
     );
   }
 
 });
+// <button onClick={this.toggleFavorite}>{text}</button>
 
 module.exports = ItemFavoriteButton;

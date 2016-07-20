@@ -24,6 +24,11 @@
   font-size: 22px;
 }
 
+.glyphicon {
+  font-size: 20px;
+  float: left;
+}
+
 h4 {
   font-weight: 700;
 }
