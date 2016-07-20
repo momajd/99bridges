@@ -28,7 +28,7 @@ class Bridge < ActiveRecord::Base
   validates :lat, :lng, numericality: true
 
   belongs_to :user
-  has_many :favorites
+  has_many :favorites, dependent: :destroy
 
   def self.in_bounds(bounds)
    # google map bounds will be in the following format:

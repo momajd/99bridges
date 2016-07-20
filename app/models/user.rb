@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   after_initialize :ensure_session_token
 
   has_many :bridges
-  has_many :favorites
+  has_many :favorites, dependent: :destroy
   has_many :favorite_bridges, through: :favorites, source: :bridge
 
   def password=(password)
