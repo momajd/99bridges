@@ -1,5 +1,6 @@
 var React = require('react');
 var AdditionalInfo = require('./additional_info');
+var FavoriteButton = require('./favorite_button');
 var PageHeader = require('react-bootstrap').PageHeader;
 var ListGroup = require('react-bootstrap').ListGroup;
 var ListGroupItem = require('react-bootstrap').ListGroupItem;
@@ -16,6 +17,7 @@ var BridgeInfo = React.createClass({
           {bridge.title}
           <br/>
           <small>{bridge.description}</small>
+          <FavoriteButton bridge={this.props.bridge}/>
         </PageHeader>
 
         <ListGroup>

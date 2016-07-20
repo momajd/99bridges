@@ -26,6 +26,7 @@ var ItemFavoriteButton = React.createClass({
   isFavorite: function() {
     var bridge = this.props.bridge;
     var currentUser = SessionStore.currentUser();
+    if (!bridge.favorites) return;
 
     for (var i = 0; i < bridge.favorites.length; i++) {
       if (bridge.favorites[i].user_id === currentUser.id) {
@@ -45,17 +46,32 @@ var ItemFavoriteButton = React.createClass({
   },
 
   render: function() {
-    var glyph;
+    var favoriteButton;
     if (this.state.isUserLoggedIn) {
-      glyph = this.isFavorite() ? "star" : "star-empty";
+      //is there a better way to check if we are at the index page?
+      if (window.location.hash.includes('#/?') ) {
+        var glyph = this.isFavorite() ? "star" : "star-empty";
+        favoriteButton = (
+        <Glyphicon id="glyphicon" onClick={this.toggleFavorite} glyph={glyph} />
+        );
+      } else {
+        var buttonText = this.isFavorite() ? "Saved" : "Save Bridge";
+        var style = this.isFavorite() ? "warning" : "primary";
+        favoriteButton = (
+          <Button bsStyle={style }onClick={this.toggleFavorite}>
+            {buttonText}
+          </Button>
+        );
+      }
     }
 
     return (
-      <Glyphicon id="glyphicon" onClick={this.toggleFavorite} glyph={glyph} />
+      <div>
+        {favoriteButton}
+      </div>
     );
   }
 
 });
-// <button onClick={this.toggleFavorite}>{text}</button>
 
 module.exports = ItemFavoriteButton;
