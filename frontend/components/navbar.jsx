@@ -61,12 +61,15 @@ var Navigation = React.createClass({
         <LoginForm />
       </Nav>
     );
-
+    // TODO give credit to "http://www.flaticon.com/authors/freepik"
     return (
       <Navbar inverse>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#">99Bridges</a>
+            <a href="#">
+              <img className="logo-icon" src="assets/modern-bridge-road-symbol.png"></img>
+              99Bridges
+            </a>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>

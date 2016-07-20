@@ -19,6 +19,13 @@
    width: 100%;
  }
 
+ .logo-icon {
+   position: relative;
+   left: -12px;
+   height: 48px;
+   bottom: 13px;
+ }
+
 /*TODO verify height is good on other screen size*/
  .search-container {
    width: 100%;

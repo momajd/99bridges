@@ -22,6 +22,7 @@
 
 .navbar-brand {
   font-size: 22px;
+  display: flex;
 }
 
 #glyphicon {
