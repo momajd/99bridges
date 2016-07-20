@@ -1,5 +1,6 @@
 var React = require('react');
-var UserBridges = require('./user_bridges');
+var UserCreatedBridges = require('./user_created_bridges');
+var UserFavoriteBridges = require('./user_favorite_bridges');
 var ClientActions = require('../../actions/client_actions');
 var UserStore = require('../../stores/user_store');
 var PageHeader = require('react-bootstrap').PageHeader;
@@ -34,7 +35,8 @@ var UserShow = React.createClass({
           <br/>
           <small>{user.location}</small>
         </PageHeader>
-        <UserBridges user={user}/>
+        <UserCreatedBridges user={user}/>
+        <UserFavoriteBridges user={user}/>
       </div>
     );
   }

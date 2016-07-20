@@ -2,7 +2,7 @@ var React = require('react');
 var Table = require('react-bootstrap').Table;
 var Panel = require('react-bootstrap').Panel;
 
-var UserBridges = React.createClass({
+var UserCreatedBridges = React.createClass({
 
   render: function() {
     var rows;
@@ -14,7 +14,7 @@ var UserBridges = React.createClass({
             <td>{bridge.id}</td>
             <td>{bridge.title}</td>
             <td>{bridge.description}</td>
-            <td>TODO</td>
+            <td>{bridge.notes}</td>
             <td><a href={link}>Link</a></td>
           </tr>
         );
@@ -42,4 +42,4 @@ var UserBridges = React.createClass({
   }
 });
 
-module.exports = UserBridges;
+module.exports = UserCreatedBridges;
