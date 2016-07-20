@@ -50,16 +50,27 @@ var ItemFavoriteButton = React.createClass({
     if (this.state.isUserLoggedIn) {
       //is there a better way to check if we are at the index page?
       if (window.location.hash.includes('#/?') ) {
+        // button for the index page
         var glyph = this.isFavorite() ? "star" : "star-empty";
         favoriteButton = (
         <Glyphicon id="glyphicon" onClick={this.toggleFavorite} glyph={glyph} />
         );
       } else {
-        var buttonText = this.isFavorite() ? "Saved" : "Save Bridge";
-        var style = this.isFavorite() ? "warning" : "primary";
+        // button for the user pager
+        var buttonText, style, checkmark;
+        if (this.isFavorite() ) {
+          buttonText = "Saved ";
+          style = "warning";
+          checkmark = <Glyphicon glyph="ok" />;
+        } else {
+          buttonText = "Save Bridge";
+          style = "primary";
+        }
+
         favoriteButton = (
           <Button bsStyle={style }onClick={this.toggleFavorite}>
             {buttonText}
+            {checkmark}
           </Button>
         );
       }

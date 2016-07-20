@@ -1,6 +1,7 @@
 var React = require('react');
 var AdditionalInfo = require('./additional_info');
 var FavoriteButton = require('./favorite_button');
+var DirectionsLink = require('../directions');
 var PageHeader = require('react-bootstrap').PageHeader;
 var ListGroup = require('react-bootstrap').ListGroup;
 var ListGroupItem = require('react-bootstrap').ListGroupItem;
@@ -20,6 +21,9 @@ var BridgeInfo = React.createClass({
           <FavoriteButton bridge={this.props.bridge}/>
         </PageHeader>
 
+        <h4>
+          <DirectionsLink bridge={bridge} linkText="Get Directions"/>
+        </h4>
         <ListGroup>
           <ListGroupItem header='Listed By'>{bridge.author}</ListGroupItem>
           <ListGroupItem header='Latitude'>{bridge.lat}</ListGroupItem>
