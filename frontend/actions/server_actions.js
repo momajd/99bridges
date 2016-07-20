@@ -47,5 +47,17 @@ module.exports = {
     });
   },
 
+  receiveFavorite: function(favorite) {
+    AppDispatcher.dispatch({
+      actionType: BridgeConstants.FAVORITE_RECEIVED,
+      favorite: favorite
+    });
+  },
 
+  removeFavorite: function(favorite) {
+    AppDispatcher.dispatch({
+      actionType: BridgeConstants.FAVORITE_REMOVED,
+      favorite: favorite
+    });
+  }
 };

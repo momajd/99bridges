@@ -8,7 +8,7 @@ var BridgeFormModal = require('./bridge_form');
 var SearchContainer = React.createClass({
 
   getInitialState: function () {
-    return {bridges: BridgeStore.all(), creatingBridge: false};
+    return {bridges: BridgeStore.all()};
   },
 
   updateBridges: function () {
@@ -21,10 +21,6 @@ var SearchContainer = React.createClass({
 
   componentWillUnmount: function () {
     this.listener.remove();
-  },
-
-  toggleButton: function () {
-    this.setState({creatingBridge: !this.state.creatingBridge});
   },
 
   render: function() {

@@ -32,5 +32,13 @@ module.exports = {
 
   fetchUser: function (userId) {
     ApiUtils.fetchUser(userId);
+  },
+
+  createFavorite: function (favorite) {
+    ApiUtils.createFavorite(favorite);
+  },
+
+  deleteFavorite: function (favorite) {
+    ApiUtils.deleteFavorite(favorite);
   }
 };
