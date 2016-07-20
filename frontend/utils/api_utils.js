@@ -44,9 +44,31 @@ module.exports = {
 
   fetchUser: function (userId) {
     $.ajax({
-      url: '/api/users/' + userId,
+      url: 'api/users/' + userId,
       success: function(user) {
         ServerActions.receiveUser(user);
+      }
+    });
+  },
+
+  createFavorite: function (favorite) {
+    $.ajax({
+      url: 'api/favorites',
+      type: 'POST',
+      data: {favorite: favorite},
+      success: function(favoriteData) {
+        ServerActions.receiveFavorite(favoriteData);
+      }
+    });
+  },
+
+  deleteFavorite: function (favorite) {
+    $.ajax({
+      url: 'api/favorites/1', //the id from params will not be used
+      type: 'DELETE',
+      data: {favorite: favorite},
+      success: function(favoriteData) {
+        ServerActions.removeFavorite(favoriteData);
       }
     });
   }
