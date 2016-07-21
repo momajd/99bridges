@@ -51,7 +51,7 @@ var AdditionalInfoEdit = React.createClass({
     var bridge = {
       id: this.props.bridge.id,
       description: this.state.description,
-      image_url: this.state.imageUrl,
+      img_url: this.state.imageUrl,
       spans: this.state.spans,
       superstructure_type: this.state.superstructureType,
       substructure_type: this.state.substructureType,

@@ -53,7 +53,8 @@
 }
 
 .bridge-index-item {
-  background-color: #F0F0EB;
+  /*background-color: #F0F0EB;*/
+  background-color: #dfdfd9;
   border-radius: 5px;
   min-height: 100px;
   padding: 10px;
@@ -80,6 +81,7 @@
 
 .bridge-index-item img {
   height: 80px;
+  width: 120px;
   float: right;
   margin: 6px;
 }

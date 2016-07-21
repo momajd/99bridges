@@ -13,10 +13,9 @@ var UserCreatedBridges = React.createClass({
         return (
           <tr key={bridge.id}>
             <td>{bridge.id}</td>
-            <td>{bridge.title}</td>
+            <td><a href={link}>{bridge.title}</a></td>
             <td>{bridge.description}</td>
             <td>{bridge.notes}</td>
-            <td><a href={link}>Link</a></td>
             <td><DirectionsLink bridge={bridge} linkText="Link" /> </td>
           </tr>
         );
@@ -28,12 +27,11 @@ var UserCreatedBridges = React.createClass({
           <Table responsive>
             <thead>
               <tr>
-                <th>Bridge Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Additional Notes</th>
-                <th>Profile</th>
-                <th>Directions</th>
+                <th width='80px'>Bridge Id</th>
+                <th width='200px'>Title</th>
+                <th width='400px'>Description</th>
+                <th width='180px'>Additional Notes</th>
+                <th width='90px'>Directions</th>
               </tr>
             </thead>
             <tbody>

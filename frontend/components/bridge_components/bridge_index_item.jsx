@@ -11,6 +11,7 @@ var BridgeIndexItem = React.createClass({
   },
 
   render: function() {
+    var imageUrl = this.props.bridge.img_url || "assets/modern-bridge-road-symbol.png"
 
     return (
       <div
@@ -18,7 +19,7 @@ var BridgeIndexItem = React.createClass({
         id={this.props.bridge.id}
         onClick={this.handleClick}>
 
-        <Image src={this.props.bridge.img_url} rounded responsive/>
+        <Image src={imageUrl} rounded responsive/>
         <FavoriteButton bridge={this.props.bridge} />
         <div className='bridge-index-item-info'>
           <h3>{this.props.bridge.title}</h3>
