@@ -82,7 +82,7 @@ var IndexMap = React.createClass({
     var mapOptions = {
       // center: {lat: 37.7758, lng: -122.435}, //SF
       center: {lat: 40.7049859197089, lng: -73.9956557750702}, //NYC
-      zoom: 10,
+      zoom: 11,
     };
     this.map = new google.maps.Map(mapDOMNode, mapOptions);
   },

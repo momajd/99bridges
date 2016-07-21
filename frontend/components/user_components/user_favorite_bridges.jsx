@@ -23,7 +23,7 @@ var UserFavoriteBridges = React.createClass({
     }
 
     return (
-        <Panel collapsible defaultExpanded header="Favorite Bridges">
+        <Panel collapsible defaultExpanded header="Saved Bridges">
           <Table responsive>
             <thead>
               <tr>

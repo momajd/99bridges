@@ -163,11 +163,23 @@ bridge = Bridge.create([
   },
   {title: "I-80 over Hackensack River", description: "continuous steel girder",
     lat: 40.8670230064734, lng: -74.0353310108185
+  },
+  {title: "NJ-3 over Hackensack River", description: "severe scour at abutment",
+    lat: 40.8000048336024, lng:-74.0660691261292
+  },
+  {title: "I-78 over Newark Bay", description: "recently rehabilitated",
+    lat: 40.6931351701502, -74.1114521026611
   }
-
 ])
 
 users = User.create([
   {username: "Guest", password: "password"},
   {username: "Mo_Majd", password: "password"}
   ])
+
+# randomly take a third of the bridges and use them for favorites
+saved_bridge_indeces = (1..bridge.length).to_a.shuffle.take(bridge.length/3)
+
+saved_bridge_indeces.each do |bridge_idx|
+  Favorite.create(user_id: 1, bridge_id: bridge_idx)
+end
