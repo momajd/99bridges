@@ -13,12 +13,10 @@ var DirectionsLink = React.createClass({
     }
 
     return (
-      <div>
-        <a href={target}
-          target={target}>
-          {this.props.linkText}
-        </a>
-      </div>
+      <a href={target}
+        target={target}>
+        {this.props.linkText}
+      </a>
     );
   }
 
