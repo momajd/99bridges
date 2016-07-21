@@ -47,3 +47,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'annotate'
 end
+
+group :production do
+  gem 'newrelic_rpm'
+end
