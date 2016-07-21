@@ -166,14 +166,14 @@ var AdditionalInfoEdit = React.createClass({
                 </FormControl>
                 <br/>
 
-                <ControlLabel>Total Length:</ControlLabel>
+                <ControlLabel>Total Length (ft):</ControlLabel>
                 <FormControl
                   value={this.state.length}
                   onChange={this.handleLengthChange}>
                 </FormControl>
                 <br/>
 
-                <ControlLabel>Width:</ControlLabel>
+                <ControlLabel>Width (ft):</ControlLabel>
                 <FormControl
                   value={this.state.width}
                   onChange={this.handleWidthChange}>

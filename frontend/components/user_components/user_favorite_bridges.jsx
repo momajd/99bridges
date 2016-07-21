@@ -29,8 +29,8 @@ var UserFavoriteBridges = React.createClass({
               <tr>
                 <th width='80px'>Bridge Id</th>
                 <th width='200px'>Title</th>
-                <th width='400px'>Description</th>
-                <th width='180px'>Additional Notes</th>
+                <th width='320px'>Description</th>
+                <th width='260px'>Additional Notes</th>
                 <th width='90px'>Directions</th>
               </tr>
             </thead>

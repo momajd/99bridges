@@ -39,11 +39,11 @@ var AdditionalInfo = React.createClass({
               <td>{bridge.year_built}</td>
             </tr>
             <tr>
-              <td>Total Bridge Length:</td>
+              <td>Total Bridge Length (ft):</td>
               <td>{bridge.length}</td>
             </tr>
             <tr>
-              <td>Bridge Width:</td>
+              <td>Bridge Width (ft):</td>
               <td>{bridge.width}</td>
             </tr>
             <tr>

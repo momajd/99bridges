@@ -84,4 +84,5 @@ var Navigation = React.createClass({
 
 module.exports = Navigation;
 
+// asset pipeline not working on heroku??
 // <img className="logo-icon" src="assets/modern-bridge-road-symbol.png"></img>
