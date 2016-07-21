@@ -23,7 +23,7 @@ bridge = Bridge.create([
   },
   {title: "I-80 over 3rd Street", description: "near Bay Bridge",
     lat: 37.781391, lng: -122.397874, user_id: 2, condition: "Fair", superstructure_type: "prestressed concrete",
-    substructure_type: "reinforced concrete"}
+    substructure_type: "reinforced concrete"
   },
   {title: "I-80 ramp", description: "needs replacement", lat: 37.787307, lng: -122.395858, user_id: 2,
     condition: "FUBAR", notes: "recently inspected"
@@ -76,8 +76,12 @@ bridge = Bridge.create([
     notes: "very old bridge but in good condition",
     img_url: "http://c4.nrostatic.com/sites/default/files/styles/original_image_with_cropping/public/uploaded/pic_giant_052915_SM_Brooklyn-Bridge-DT.jpg?itok=-MTToI9Z"
   },
-  
-
+  {title: "Verrazano-Narrows Bridge", description: "double-decked suspension bridge",
+    lat: 40.609350, lng: -74.035649, user_id: 1, spans: 3, condition: "Good", year_built: 1959,
+    length: 13700, superstructure_type: "suspension, concrete deck", substructure_type: "concrete/steel",
+    notes: "next inspection is scheduled for January, 2017",
+    img_url: "http://www.5dguide.com/wp-content/uploads/2015/11/verrazano-1.jpg"
+  }
 ])
 
 users = User.create([
