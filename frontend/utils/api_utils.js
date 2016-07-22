@@ -42,6 +42,17 @@ module.exports = {
     });
   },
 
+  deleteBridge: function(bridge) {
+    $.ajax({
+      url: "api/bridges/" + bridge.id,
+      type: "DELETE",
+      data: {bridge: bridge},
+      success: function () {
+        ServerActions.removeBridge(bridge);
+      }
+    });
+  },
+
   fetchUser: function (userId) {
     $.ajax({
       url: 'api/users/' + userId,

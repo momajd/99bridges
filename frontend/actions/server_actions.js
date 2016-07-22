@@ -19,6 +19,13 @@ module.exports = {
     });
   },
 
+  removeBridge: function(bridge) {
+    AppDispatcher.dispatch({
+      actionType: BridgeConstants.REMOVE_BRIDGE,
+      bridge: bridge
+    });
+  },
+
   receiveCurrentUser: function(user) {
     AppDispatcher.dispatch({
       actionType: SessionConstants.USER_LOGIN,

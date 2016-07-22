@@ -150,9 +150,12 @@ var IndexMap = React.createClass({
     var bridgeId = bridge.id;
     var infoWindow = new google.maps.InfoWindow({
       content: (
-        `<h3> <a href=#/bridges/${bridge.id}> ${bridge.title} </a></h3>
+        `<div class=info-window-text>
+          <h3> <a href=#/bridges/${bridge.id}> ${bridge.title} </a></h3>
+        </div>
         <div class=street-view id=${bridge.id}></div>`
-      )
+      ),
+      disableAutoPan: true
     });
     //keep a reference to each marker's infoWindow (see createMarkerHoverEffects)
     marker.infoWindow = infoWindow;

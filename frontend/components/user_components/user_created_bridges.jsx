@@ -31,7 +31,7 @@ var UserCreatedBridges = React.createClass({
                 <th width='200px'>Title</th>
                 <th width='320px'>Description</th>
                 <th width='260px'>Additional Notes</th>
-                <th width='90px'>Directions</th>
+                <th width='90px'>Get Directions</th>
               </tr>
             </thead>
             <tbody>

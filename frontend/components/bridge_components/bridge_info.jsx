@@ -1,4 +1,6 @@
 var React = require('react');
+var ClientActions = require('../../actions/client_actions');
+var SessionStore = require('../../stores/session_store');
 var AdditionalInfo = require('./additional_info');
 var FavoriteButton = require('./favorite_button');
 var DirectionsLink = require('../directions');
@@ -6,11 +8,24 @@ var PageHeader = require('react-bootstrap').PageHeader;
 var ListGroup = require('react-bootstrap').ListGroup;
 var ListGroupItem = require('react-bootstrap').ListGroupItem;
 var Image = require('react-bootstrap').Image;
+var Button = require('react-bootstrap').Button;
 
 var BridgeInfo = React.createClass({
 
+  deleteBridge: function() {
+    if (confirm("Are you sure? This can't be undone")) {
+      ClientActions.deleteBridge(this.props.bridge);
+      window.location = '#';
+    }
+  },
+
   render: function() {
     var bridge = this.props.bridge;
+
+    var deleteButton = SessionStore.isUserLoggedIn() ? (
+      <Button bsStyle='danger' onClick={this.deleteBridge}>Delete Bridge
+      </Button> ) : null;
+
     return (
       <div className='show-page-info'>
         <PageHeader>
@@ -34,6 +49,7 @@ var BridgeInfo = React.createClass({
         </ListGroup>
 
         <AdditionalInfo bridge={bridge}/>
+        {deleteButton}
       </div>
     );
   }

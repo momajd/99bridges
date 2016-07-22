@@ -108,7 +108,7 @@ var AdditionalInfoEdit = React.createClass({
   render: function() {
     return (
       <div>
-        <Button onClick={this.openModal}>Update Bridge Info</Button>
+        <Button onClick={this.openModal}>Edit Bridge Info</Button>
 
         <Modal show={this.state.showModal} onHide={this.closeModal}>
           <Modal.Header closeButton>

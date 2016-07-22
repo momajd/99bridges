@@ -22,6 +22,10 @@ function resetSingleBridge (bridge) {
   _bridges[bridge.id] = bridge;
 }
 
+function removeBridge (bridge) {
+  delete _bridges[bridge.id];
+}
+
 function addFavorite (favorite) {
   _bridges[favorite.bridge_id].favorites.push(favorite);
 }
@@ -44,6 +48,10 @@ BridgeStore.__onDispatch = function(payload) {
       break;
     case BridgeConstants.SINGLE_BRIDGE_RECEIVED:
       resetSingleBridge(payload.bridge);
+      BridgeStore.__emitChange();
+      break;
+    case BridgeConstants.REMOVE_BRIDGE:
+      removeBridge(payload.bridge);
       BridgeStore.__emitChange();
       break;
     case BridgeConstants.FAVORITE_RECEIVED:

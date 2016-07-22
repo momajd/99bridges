@@ -29,6 +29,12 @@ class Api::BridgesController < ApplicationController
     end
   end
 
+  def destroy
+    @bridge = Bridge.find(params[:id])
+    @bridge.destroy
+    render :show
+  end
+
   private
   def bridge_params
     params.require(:bridge).permit(:title, :description, :lat, :lng, :img_url,

@@ -82,7 +82,8 @@ var NewBridgeForm = React.createClass({
 
         <br/>
         <ControlLabel>Image Url</ControlLabel>
-        <FormControl onChange={this.handleImageUrlChange}/>
+        <FormControl 
+          onChange={this.handleImageUrlChange}/>
 
         <hr/>
         <Button type="submit" disabled={this.buttonIsDisabled()}>
