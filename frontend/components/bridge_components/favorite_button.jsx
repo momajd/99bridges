@@ -3,7 +3,6 @@ var SessionStore = require('../../stores/session_store');
 var ClientActions = require('../../actions/client_actions');
 var Button = require('react-bootstrap').Button;
 var Glyphicon = require('react-bootstrap').Glyphicon;
-// TODO include credit in readme http://glyphicons.com/
 
 var ItemFavoriteButton = React.createClass({
 

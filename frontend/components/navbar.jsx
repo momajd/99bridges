@@ -61,7 +61,7 @@ var Navigation = React.createClass({
         <LoginForm />
       </Nav>
     );
-    // TODO give credit to "http://www.flaticon.com/authors/freepik"
+    
     return (
       <Navbar inverse>
         <Navbar.Header>

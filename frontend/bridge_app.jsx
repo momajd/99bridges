@@ -15,14 +15,6 @@ var ServerActions = require('./actions/server_actions');
 // Stores
 var SessionStore = require('./stores/session_store');
 
-// TODO remove after testing
-window.BridgeStore = require('./stores/bridge_store');
-window.SessionStore = require('./stores/session_store');
-window.ClientActions = require('./actions/client_actions');
-window.SessionUtils = require('./utils/session_api_utils');
-window.ErrorStore = require('./stores/error_store');
-window.UserStore = require('./stores/user_store');
-
 var App = React.createClass({
   render: function () {
     return (

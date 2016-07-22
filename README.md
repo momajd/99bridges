@@ -12,7 +12,7 @@ The backend was created with Ruby on Rails using PostgreSQL database; React with
 
 ### Google Maps API for creating and viewing bridges
 
-
+![Index](/docs/images/index.png)
 
 Once a map is placed on the document, a listener is added to the map which sends a request to the server for all the bridges that are within the map's bounds. Every time the map is panned, the event callback sends another request.
 
@@ -33,7 +33,7 @@ componentDidMount: function () {
 }
 ```
 
-The biggest challenge of setting up the map functionality was getting the markers to respond to hover events of items in the bridge index. Since the index and the map markers aren't parent/child React components, another event system has to be set up in order for them to communicate with each other. This system was setup using `jQuery`.
+The biggest challenge of setting up the map functionality was getting the markers to respond to hover events of items in the bridge index. Since the index and the map markers aren't parent/child React components, another event system must be set up in order for them to communicate with each other. This system was setup using `jQuery`.
 
 Ids were defined on the index items and markers that correspond to their respective bridge. In the `createMarkerHoverEffects` function, a `jQuery` object is iterated over and a hover event is set up for the marker that matches the index item's id.
 
@@ -78,3 +78,23 @@ To avoid fetching the current user on the frontend asychronously and momentarily
 
 <main id='content'></main>
 ```
+
+### Bridge Page
+
+![Bridge-Show](/docs/images/bridge_show.png)
+
+Bridges can be saved by the user. Saved bridges appear on the user's page.
+
+
+## Gems and Libraries
+- BCrypt
+- React
+- React-Bootstrap
+
+## Credits
+http://www.flaticon.com/authors/freepik
+http://glyphicons.com/
+
+
+## Future Features
+- [ ] Add events so that users can schedule inspections or other site visits
