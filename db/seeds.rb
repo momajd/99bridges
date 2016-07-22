@@ -165,10 +165,10 @@ bridge = Bridge.create([
     lat: 40.8670230064734, lng: -74.0353310108185
   },
   {title: "NJ-3 over Hackensack River", description: "severe scour at abutment",
-    lat: 40.8000048336024, lng:-74.0660691261292
+    lat: 40.8000048336024, lng: -74.0660691261292
   },
   {title: "I-78 over Newark Bay", description: "recently rehabilitated",
-    lat: 40.6931351701502, -74.1114521026611
+    lat: 40.6931351701502, lng: -74.1114521026611
   }
 ])
 
