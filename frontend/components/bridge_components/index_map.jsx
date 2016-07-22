@@ -154,8 +154,7 @@ var IndexMap = React.createClass({
           <h3> <a href=#/bridges/${bridge.id}> ${bridge.title} </a></h3>
         </div>
         <div class=street-view id=${bridge.id}></div>`
-      ),
-      disableAutoPan: true
+      )
     });
     //keep a reference to each marker's infoWindow (see createMarkerHoverEffects)
     marker.infoWindow = infoWindow;
