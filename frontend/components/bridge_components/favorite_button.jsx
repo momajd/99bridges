@@ -62,7 +62,7 @@ var ItemFavoriteButton = React.createClass({
           style = "warning";
           checkmark = <Glyphicon glyph="ok" />;
         } else {
-          buttonText = "Add to Saved Bridges";
+          buttonText = "Add to My Bridges";
           style = "primary";
         }
 
