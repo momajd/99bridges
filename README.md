@@ -4,7 +4,7 @@
 
 [heroku]: http://ninetyninebridges.herokuapp.com
 
-99Bridges is a single-page, full-stack application that allows Bridge Engineers, Construction Professionals, and Bridge Enthusiasts to find and track information on bridges. I worked as a structural engineer for several years and I found that most companies are storing bridge information in spreadsheets. This application aims to make the system more efficient and modern.
+99Bridges is a single-page, full-stack application that allows Bridge Engineers, Construction Professionals, and Bridge Enthusiasts to find and track information on bridges. I worked as a structural engineer for several years and I found that most companies don't have an efficient system in place to easily access bridge locations and information. The goal of this application is to make the system more efficient and modern.
 
 The backend was created with Ruby on Rails using PostgreSQL database; React with Flux architecture was used for the frontend. Styling was done with a combination of CSS and React-Bootstrap.
 
@@ -92,9 +92,9 @@ Bridges can be saved by the user. Saved bridges appear on the user's page.
 - React-Bootstrap
 
 ## Credits
-http://www.flaticon.com/authors/freepik
-http://glyphicons.com/
+http://www.flaticon.com/authors/freepix
 
+http://glyphicons.com
 
 ## Future Features
 - [ ] Add events so that users can schedule inspections or other site visits
