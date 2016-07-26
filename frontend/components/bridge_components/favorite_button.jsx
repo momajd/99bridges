@@ -55,7 +55,7 @@ var ItemFavoriteButton = React.createClass({
         <Glyphicon id="glyphicon" title="Add to Saved Bridges" onClick={this.toggleFavorite} glyph={glyph} />
         );
       } else {
-        // button for the user pager
+        // button for the user page
         var buttonText, style, checkmark;
         if (this.isFavorite() ) {
           buttonText = "Saved ";
