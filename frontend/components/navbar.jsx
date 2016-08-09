@@ -38,6 +38,9 @@ var Navigation = React.createClass({
         ClientActions.logout();
         hashHistory.push('#');
         break;
+      case 2:
+        hashHistory.push('/about');
+        break;
     }
   },
 
@@ -61,7 +64,7 @@ var Navigation = React.createClass({
         <LoginForm />
       </Nav>
     );
-    
+
     return (
       <Navbar inverse>
         <Navbar.Header>
@@ -76,6 +79,9 @@ var Navigation = React.createClass({
 
         <Navbar.Collapse>
           {navRightItems}
+          <Nav pullRight onSelect={this.handleSelect}>
+            <MenuItem eventKey={2}>About</MenuItem>
+          </Nav>
         </Navbar.Collapse>
       </Navbar>
     );

@@ -151,7 +151,7 @@ var IndexMap = React.createClass({
     var infoWindow = new google.maps.InfoWindow({
       content: (
         `<div class=info-window-text>
-          <h3> <a href=#/bridges/${bridge.id}> ${bridge.title} </a></h3>
+          <h4> <a href=#/bridges/${bridge.id}> ${bridge.title} </a></h4>
         </div>
         <div class=street-view id=${bridge.id}></div>`
       )
