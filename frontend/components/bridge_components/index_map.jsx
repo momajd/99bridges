@@ -48,11 +48,37 @@ var IndexMap = React.createClass({
       ClientActions.fetchAllBridges(bounds);
     });
 
-    // Open form for new bridge when map is clicked
+    this.newBridgeCoords = [];
+    this.tempMarkers = [];
     google.maps.event.addListener(this.map, 'click', function(e) {
       if (self.state.mapIsClickable) {
-        self.newBridgeCoords = e.latLng;
-        self.openModal();
+        var coord = {lat: e.latLng.lat(), lng: e.latLng.lng()};
+        self.newBridgeCoords.push(coord);
+
+        // temporary marker to represent a corner
+        var marker = new google.maps.Marker(
+          {position: e.latLng, map: self.map}
+          );
+        self.tempMarkers.push(marker);
+
+        if (self.newBridgeCoords.length === 4) {
+          var poly = new google.maps.Polygon({
+              paths: self.newBridgeCoords,
+              strokeColor: '#0000FF',
+              strokeOpacity: 0.9,
+              strokeWeight: 2,
+              fillColor: '#FF0000',
+              fillOpacity: 0.6,
+              map: self.map
+            });
+
+          self.newBridgeCoords = [];
+          self.tempMarkers.forEach(tempMarker => tempMarker.setMap(null));
+          // self.openModal();
+        }
+
+        // TODO verify right props are being passed to modal component;
+        // self.newBridgeCoords = e.latLng;
       }
     });
 
