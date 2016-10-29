@@ -72,13 +72,10 @@ var IndexMap = React.createClass({
               map: self.map
             });
 
-          self.newBridgeCoords = [];
           self.tempMarkers.forEach(tempMarker => tempMarker.setMap(null));
-          // self.openModal();
+          self.openModal();
+          self.newBridgeCoords = [];
         }
-
-        // TODO verify right props are being passed to modal component;
-        // self.newBridgeCoords = e.latLng;
       }
     });
 

@@ -2,6 +2,8 @@ var React = require('react');
 var ClientActions = require('../../actions/client_actions');
 var SessionStore = require('../../stores/session_store');
 var FormGroup = require('react-bootstrap').FormGroup;
+var Form = require('react-bootstrap').Form;
+var Table = require('react-bootstrap').Table;
 var ControlLabel = require('react-bootstrap').ControlLabel;
 var FormControl = require('react-bootstrap').FormControl;
 var HelpBlock = require('react-bootstrap').HelpBlock;
@@ -42,8 +44,10 @@ var NewBridgeForm = React.createClass({
     var bridgeData = {
       title: this.state.title,
       description: this.state.description,
-      lat: this.props.coords.lat(),
-      lng: this.props.coords.lng(),
+      corner1: this.props.coords[0],
+      corner2: this.props.coords[1],
+      corner3: this.props.coords[2],
+      corner4: this.props.coords[3],
       img_url: this.state.imageUrl,
       user_id: SessionStore.currentUser().id
     };
@@ -53,9 +57,18 @@ var NewBridgeForm = React.createClass({
 
   render: function () {
 
+    var cornerLocations = this.props.coords.map( (coord, idx) => {
+      return (
+        <tr key={idx}>
+          <td>{idx + 1}</td>
+          <td>{coord.lat}</td>
+          <td>{coord.lng}</td>
+        </tr>
+      );
+    });
+
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div id='street-view'></div>
+      <Form onSubmit={this.handleSubmit}>
         <FormGroup
           controlId="formBasicText"
           validationState={this.getValidationState()}>
@@ -67,30 +80,37 @@ var NewBridgeForm = React.createClass({
           <FormControl.Feedback />
         </FormGroup>
 
-        <br/>
-        <ControlLabel>Bridge Description</ControlLabel>
-        <FormControl
-          placeholder="e.g. three-span continuous, steel-girder"
-          onChange={this.handleDescriptionChange}/>
-        <br/>
-        <ControlLabel>Latitude</ControlLabel>
-        <FormControl value={this.props.coords.lat()} disabled='true'/>
+        <FormGroup>
+          <ControlLabel>Bridge Description</ControlLabel>
+          <FormControl
+            placeholder="e.g. three-span continuous, steel-girder"
+            onChange={this.handleDescriptionChange}/>
+        </FormGroup>
 
-        <br/>
-        <ControlLabel>Longitude</ControlLabel>
-        <FormControl value={this.props.coords.lng()} disabled='true'/>
+        <FormGroup>
+          <ControlLabel>Image Url</ControlLabel>
+          <FormControl onChange={this.handleImageUrlChange}/>
+        </FormGroup>
 
-        <br/>
-        <ControlLabel>Image Url</ControlLabel>
-        <FormControl 
-          onChange={this.handleImageUrlChange}/>
+        <Table>
+          <thead>
+            <tr>
+              <th>Corner #</th>
+              <th>Latitude</th>
+              <th>Longitude</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cornerLocations}
+          </tbody>
+        </Table>
 
         <hr/>
         <Button type="submit" disabled={this.buttonIsDisabled()}>
           Submit Bridge
         </Button>
 
-      </form>
+      </Form>
     );
   }
 });
