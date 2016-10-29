@@ -37,7 +37,8 @@ var IndexMap = React.createClass({
 
   componentDidMount: function() {
     this.placeMap();
-    this.markers = {};
+    this.markers = {}; //TODO remove
+    this.polygons = {};
 
     this.sessionListener = SessionStore.addListener(this.updateMapClickability);
 
@@ -62,16 +63,6 @@ var IndexMap = React.createClass({
         self.tempMarkers.push(marker);
 
         if (self.newBridgeCoords.length === 4) {
-          var poly = new google.maps.Polygon({
-              paths: self.newBridgeCoords,
-              strokeColor: '#0000FF',
-              strokeOpacity: 0.9,
-              strokeWeight: 2,
-              fillColor: '#FF0000',
-              fillOpacity: 0.6,
-              map: self.map
-            });
-
           self.tempMarkers.forEach(tempMarker => tempMarker.setMap(null));
           self.openModal();
           self.newBridgeCoords = [];
@@ -89,7 +80,7 @@ var IndexMap = React.createClass({
   },
 
   componentDidUpdate: function() {
-    this.updateMarkers();
+    this.updatePolygons();
   },
 
   getMapBounds: function() {
@@ -114,63 +105,71 @@ var IndexMap = React.createClass({
     this.map = new google.maps.Map(mapDOMNode, mapOptions);
   },
 
-  updateMarkers: function () {
-    this.newBridgesToAdd().forEach(function(bridge) {
-      this.createMarker(bridge);
-    }, this);
-
-    this.markersToRemove().forEach(function(marker) {
-      this.removeMarker(marker);
-    }, this);
+  updatePolygons: function () {
+    this.newBridgesToAdd().forEach( bridge => { this.createPolygon(bridge);} );
+    this.polygonsToRemove().forEach( poly => {this.removePolygon(poly); });
   },
 
   newBridgesToAdd: function () {
     var allBridges = this.props.bridges;
     var newBridges = [];
-
-    // add if a bridge in the props is not yet in this.markers
+    // add if a bridge in the props is not yet in this.polygons
     var self = this;
-    Object.keys(allBridges).forEach(function(bridgeId) {
-      if (!self.markers.hasOwnProperty(bridgeId) ) {
+    for (var bridgeId in allBridges) {
+      if (!self.polygons.hasOwnProperty(bridgeId) ) {
         newBridges.push(allBridges[bridgeId]);
       }
-    });
+    }
+    debugger
     return newBridges;
   },
 
-  markersToRemove: function () {
+  polygonsToRemove: function () {
     var allBridges = this.props.bridges;
-    var removeMarkers = [];
+    var removePolygons = [];
 
-    // remove a bridge if it is in the markers but wasn't received by props
+    // remove a bridge if it is in the polygons but wasn't received by props
     var self = this;
-    Object.keys(this.markers).forEach(function(bridgeId) {
-      var marker = self.markers[bridgeId];
+    Object.keys(this.polygons).forEach(function(bridgeId) {
+      var polygon = self.polygons[bridgeId];
       if ( !allBridges.hasOwnProperty(bridgeId) ) {
-         removeMarkers.push(marker);
+         removePolygons.push(polygon);
       }
     });
-    return removeMarkers;
+    return removePolygons;
   },
 
-  createMarker: function (bridge) {
-    var markerPos = {lat: bridge.lat, lng: bridge.lng};
-    var marker = new google.maps.Marker({
-      position: markerPos,
-      map: this.map,
-      bridgeId: bridge.id,
-      icon: {
-        url: 'http://maps.google.com/mapfiles/marker_purple.png'
-      },
-      url: "/bridges/" + bridge.id
-    });
-    google.maps.event.addListener(marker, 'click', function() {
-      hashHistory.push(marker.url);
+  removePolygon: function (polygon) {
+    debugger
+    polygon.setMap(null);
+    delete this.polygons[polygon];
+  },
+
+  createPolygon: function (bridge) {
+    var bridgeCoords = [
+      bridge.corner1, bridge.corner2, bridge.corner3, bridge.corner4
+    ].map( obj => {
+      // the lats and lngs will be in string format
+      return {lat: Number(obj.lat), lng: Number(obj.lng)};
     });
 
-    this.createInfoWindow(bridge, marker);
-    this.createMarkerHoverEffects();
-    this.markers[bridge.id] = marker;
+    var polygon = new google.maps.Polygon({
+        paths: bridgeCoords,
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.9,
+        strokeWeight: 2,
+        fillColor: '#FF0000',
+        fillOpacity: 0.6,
+        map: this.map
+      });
+    // TODO remove if not needed
+    // google.maps.event.addListener(marker, 'click', function() {
+    //   hashHistory.push(marker.url);
+    // });
+
+    // this.createInfoWindow(bridge, marker);
+    // this.createMarkerHoverEffects();
+    this.polygons[bridge.id] = polygon;
   },
 
   createInfoWindow: function (bridge, marker) {
@@ -212,11 +211,6 @@ var IndexMap = React.createClass({
     google.maps.event.addListener(this.map, 'mousemove', function() {
       infoWindow.close();
     });
-  },
-
-  removeMarker: function (marker) {
-    marker.setMap(null);
-    delete this.markers[marker.bridgeId];
   },
 
   createMarkerHoverEffects: function() {

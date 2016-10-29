@@ -1,6 +1,8 @@
 @bridges.each do |bridge|
   json.set! bridge.id do
-    json.extract! bridge, :id, :title, :description, :lat, :lng, :img_url
+    json.extract! bridge, :id, :title, :description, :center_lat, :center_lng,
+          :img_url, :corner1, :corner2, :corner3, :corner4
+
     json.author bridge.user.username
 
     json.favorites bridge.favorites do |favorite|

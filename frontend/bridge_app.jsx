@@ -16,6 +16,9 @@ var ServerActions = require('./actions/server_actions');
 // Stores
 var SessionStore = require('./stores/session_store');
 
+// TODO remove from window
+window.bridgeStore = require('./stores/bridge_store');
+
 var App = React.createClass({
   render: function () {
     return (
