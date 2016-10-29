@@ -5,8 +5,8 @@
 #  id                  :integer          not null, primary key
 #  title               :string           not null
 #  description         :string
-#  lat                 :float            not null
-#  lng                 :float            not null
+#  center_lat          :float            not null
+#  center_lng          :float            not null
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  img_url             :string
@@ -19,13 +19,17 @@
 #  length              :float
 #  width               :float
 #  notes               :string
+#  corner1             :text
+#  corner2             :text
+#  corner3             :text
+#  corner4             :text
 #
 
 class Bridge < ActiveRecord::Base
 
   validates :title, :lat, :lng, :user_id, presence: true
   validates :title, length: {minimum: 6}
-  validates :lat, :lng, numericality: true
+  # validates :lat, :lng, numericality: true
 
   belongs_to :user
   has_many :favorites, dependent: :destroy
@@ -44,6 +48,11 @@ class Bridge < ActiveRecord::Base
       "(lat BETWEEN ? AND ?) AND (lng BETWEEN ? AND ?)",
       south_west["lat"], north_east["lat"], south_west["lng"], north_east["lng"]
     )
+  end
+
+  private
+  def calculate_center(corner1, corner2, corner3, corner4)
+    
   end
 
 end

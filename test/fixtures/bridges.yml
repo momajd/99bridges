@@ -5,8 +5,8 @@
 #  id                  :integer          not null, primary key
 #  title               :string           not null
 #  description         :string
-#  lat                 :float            not null
-#  lng                 :float            not null
+#  center_lat          :float            not null
+#  center_lng          :float            not null
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  img_url             :string
@@ -19,6 +19,10 @@
 #  length              :float
 #  width               :float
 #  notes               :string
+#  corner1             :text
+#  corner2             :text
+#  corner3             :text
+#  corner4             :text
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160719203734) do
+ActiveRecord::Schema.define(version: 20161029202508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 20160719203734) do
   create_table "bridges", force: :cascade do |t|
     t.string   "title",               null: false
     t.string   "description"
-    t.float    "lat",                 null: false
-    t.float    "lng",                 null: false
+    t.float    "center_lat",          null: false
+    t.float    "center_lng",          null: false
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.string   "img_url"
@@ -33,6 +33,10 @@ ActiveRecord::Schema.define(version: 20160719203734) do
     t.float    "length"
     t.float    "width"
     t.string   "notes"
+    t.text     "corner1"
+    t.text     "corner2"
+    t.text     "corner3"
+    t.text     "corner4"
   end
 
   add_index "bridges", ["user_id"], name: "index_bridges_on_user_id", using: :btree
