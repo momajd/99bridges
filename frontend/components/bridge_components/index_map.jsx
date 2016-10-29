@@ -120,7 +120,6 @@ var IndexMap = React.createClass({
         newBridges.push(allBridges[bridgeId]);
       }
     }
-    debugger
     return newBridges;
   },
 
@@ -140,27 +139,27 @@ var IndexMap = React.createClass({
   },
 
   removePolygon: function (polygon) {
-    debugger
     polygon.setMap(null);
-    delete this.polygons[polygon];
+    delete this.polygons[polygon.bridgeId];
   },
 
   createPolygon: function (bridge) {
     var bridgeCoords = [
       bridge.corner1, bridge.corner2, bridge.corner3, bridge.corner4
-    ].map( obj => {
-      // the lats and lngs will be in string format
-      return {lat: Number(obj.lat), lng: Number(obj.lng)};
+    ];
+    var bridgeCoordsParsed = bridgeCoords.map(coord => {
+      return {lat: Number(coord.lat), lng: Number(coord.lng)};
     });
 
     var polygon = new google.maps.Polygon({
-        paths: bridgeCoords,
+        paths: bridgeCoordsParsed,
         strokeColor: '#FF0000',
         strokeOpacity: 0.9,
         strokeWeight: 2,
         fillColor: '#FF0000',
         fillOpacity: 0.6,
-        map: this.map
+        map: this.map,
+        bridgeId: bridge.id
       });
     // TODO remove if not needed
     // google.maps.event.addListener(marker, 'click', function() {
