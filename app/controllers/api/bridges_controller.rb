@@ -6,7 +6,6 @@ class Api::BridgesController < ApplicationController
 
   def create
     @bridge = Bridge.new(bridge_params)
-
     if @bridge.save
       render :show
     else
@@ -37,8 +36,10 @@ class Api::BridgesController < ApplicationController
 
   private
   def bridge_params
-    params.require(:bridge).permit(:title, :description, :lat, :lng, :img_url,
-    :user_id, :condition, :spans, :superstructure_type, :substructure_type,
-    :year_built, :length, :width, :notes)
+    params.require(:bridge).permit(:title, :description,
+    :img_url, :user_id, :condition, :spans, :superstructure_type,
+    :substructure_type, :year_built, :length, :width, :notes,
+    corner1: [:lat, :lng], corner2: [:lat, :lng], corner3: [:lat, :lng],
+    corner4: [:lat, :lng])
   end
 end

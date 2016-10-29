@@ -13,6 +13,7 @@ module.exports = {
   },
 
   receiveSingleBridge: function(bridge) {
+    debugger;
     AppDispatcher.dispatch({
       actionType: BridgeConstants.SINGLE_BRIDGE_RECEIVED,
       bridge: bridge,

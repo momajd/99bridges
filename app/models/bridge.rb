@@ -27,9 +27,14 @@
 
 class Bridge < ActiveRecord::Base
 
-  validates :title, :lat, :lng, :user_id, presence: true
+  validates :title, :center_lat, :center_lng, :user_id, presence: true
   validates :title, length: {minimum: 6}
-  # validates :lat, :lng, numericality: true
+  serialize :corner1, Hash
+  serialize :corner2, Hash
+  serialize :corner3, Hash
+  serialize :corner4, Hash
+
+  after_initialize :calculate_center
 
   belongs_to :user
   has_many :favorites, dependent: :destroy
@@ -45,14 +50,17 @@ class Bridge < ActiveRecord::Base
     south_west = bounds["southWest"]
 
     Bridge.where(
-      "(lat BETWEEN ? AND ?) AND (lng BETWEEN ? AND ?)",
+      "(center_lat BETWEEN ? AND ?) AND (center_lng BETWEEN ? AND ?)",
       south_west["lat"], north_east["lat"], south_west["lng"], north_east["lng"]
     )
   end
 
   private
-  def calculate_center(corner1, corner2, corner3, corner4)
-    
-  end
+  def calculate_center
+    self.center_lat ||= [self.corner1[:lat], self.corner2[:lat],
+    self.corner3[:lat], self.corner4[:lat] ].map(&:to_f).inject(&:+) / 4
 
+    self.center_lng ||= [self.corner1[:lng], self.corner2[:lng],
+    self.corner3[:lng], self.corner4[:lng] ].map(&:to_f).inject(&:+) / 4
+  end
 end
