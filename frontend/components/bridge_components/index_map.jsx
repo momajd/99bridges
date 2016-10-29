@@ -1,3 +1,5 @@
+/* global google */
+/* eslint max-len: "off" */
 var React = require('react');
 var ReactDOM = require('react-dom');
 var hashHistory = require('react-router').hashHistory;
@@ -16,7 +18,7 @@ var IndexMap = React.createClass({
     return {
       showModal: false,
       mapIsClickable: (SessionStore.isUserLoggedIn() ? true : false)
-    }
+    };
   },
 
   closeModal: function() {
@@ -28,7 +30,9 @@ var IndexMap = React.createClass({
   },
 
   updateMapClickability: function() {
-    this.setState({mapIsClickable: (SessionStore.isUserLoggedIn() ? true : false)})
+    this.setState(
+      {mapIsClickable: (SessionStore.isUserLoggedIn() ? true : false)}
+    );
   },
 
   componentDidMount: function() {
@@ -139,7 +143,7 @@ var IndexMap = React.createClass({
     });
     google.maps.event.addListener(marker, 'click', function() {
       hashHistory.push(marker.url);
-    })
+    });
 
     this.createInfoWindow(bridge, marker);
     this.createMarkerHoverEffects();
@@ -162,7 +166,7 @@ var IndexMap = React.createClass({
     // for street view
     var pano = null;
     google.maps.event.addListener(infoWindow, 'domready', function () {
-        if (pano != null) {
+        if (pano !== null) {
             pano.unbind("position");
             pano.setVisible(false);
         }
@@ -202,7 +206,7 @@ var IndexMap = React.createClass({
 
       indexItem.hover(function(){
         self.markers[bridgeId].setAnimation(google.maps.Animation.BOUNCE);
-        self.markers[bridgeId].infoWindow.open(self.map, self.markers[bridgeId])
+        self.markers[bridgeId].infoWindow.open(self.map, self.markers[bridgeId]);
       }, function() {
         self.markers[bridgeId].setAnimation(null);
         self.markers[bridgeId].infoWindow.close();
@@ -213,7 +217,7 @@ var IndexMap = React.createClass({
   render: function () {
     var popoverMessage = this.state.mapIsClickable ? (
       'Click map to create a bridge') :
-      ('Sign in to create a bridge')
+      ('Sign in to create a bridge');
 
     return (
       <OverlayTrigger placement="top"
