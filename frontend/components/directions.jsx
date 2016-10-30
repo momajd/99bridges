@@ -7,8 +7,8 @@ var DirectionsLink = React.createClass({
     var target;
     if (bridge.id) {
       target = (
-        `https://www.google.com/maps/dir/Current+Location/${bridge.lat},
-        ${bridge.lng}`
+        `https://www.google.com/maps/dir/Current+Location/${bridge.center_lat},
+        ${bridge.center_lng}`
       );
     }
 

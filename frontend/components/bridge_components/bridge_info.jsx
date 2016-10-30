@@ -41,8 +41,8 @@ var BridgeInfo = React.createClass({
         </h4>
         <ListGroup>
           <ListGroupItem header='Listed By'>{bridge.author}</ListGroupItem>
-          <ListGroupItem header='Latitude'>{bridge.lat}</ListGroupItem>
-          <ListGroupItem header='Longitude'>{bridge.lng}</ListGroupItem>
+          <ListGroupItem header='Latitude'>{bridge.center_lat}</ListGroupItem>
+          <ListGroupItem header='Longitude'>{bridge.center_lng}</ListGroupItem>
           <ListGroupItem header='Directions'>
             <DirectionsLink bridge={bridge} linkText="Link to Google Maps"/>
           </ListGroupItem>
