@@ -503,7 +503,7 @@ bridge = Bridge.create([
     lat: "39.95481938173812",
     lng: "-75.1850813627243"
     },
-    author: "Guest",
+    user_id: 1
   },
 
   {
@@ -536,7 +536,7 @@ bridge = Bridge.create([
     lat: "39.955937863903536",
     lng: "-75.18468976020813"
     },
-    author: "Guest",
+    user_id: 2
   }
 
 
