@@ -159,19 +159,20 @@ var IndexMap = React.createClass({
         fillColor: '#FF0000',
         fillOpacity: 0.6,
         map: this.map,
-        bridgeId: bridge.id
+        bridgeId: bridge.id,
+        url: 'bridges/' + bridge.id
       });
-    // TODO remove if not needed
-    // google.maps.event.addListener(marker, 'click', function() {
-    //   hashHistory.push(marker.url);
-    // });
 
-    // this.createInfoWindow(bridge, marker);
-    // this.createMarkerHoverEffects();
+    google.maps.event.addListener(polygon, 'click', function() {
+      hashHistory.push(polygon.url);
+    });
+
+    this.createInfoWindow(bridge, polygon);
+    this.createMarkerHoverEffects();
     this.polygons[bridge.id] = polygon;
   },
 
-  createInfoWindow: function (bridge, marker) {
+  createInfoWindow: function (bridge, polygon) {
     var bridgeId = bridge.id;
     var infoWindow = new google.maps.InfoWindow({
       content: (
@@ -181,8 +182,6 @@ var IndexMap = React.createClass({
         <div class=street-view id=${bridge.id}></div>`
       )
     });
-    //keep a reference to each marker's infoWindow (see createMarkerHoverEffects)
-    marker.infoWindow = infoWindow;
 
     // for street view
     var pano = null;
@@ -198,13 +197,13 @@ var IndexMap = React.createClass({
             addressControl: false,
             linksControl: false
         });
-        pano.bindTo("position", marker);
+        pano.bindTo("position", polygon);
         pano.setVisible(true);
     });
 
     var self = this;
-    google.maps.event.addListener(marker, 'mouseover', function() {
-      infoWindow.open(self.map, marker);
+    google.maps.event.addListener(polygon, 'mouseover', function() {
+      infoWindow.open(self.map, polygon);
     });
 
     google.maps.event.addListener(this.map, 'mousemove', function() {
@@ -221,11 +220,9 @@ var IndexMap = React.createClass({
       let bridgeId = indexItem[0].id;
 
       indexItem.hover(function(){
-        self.markers[bridgeId].setAnimation(google.maps.Animation.BOUNCE);
-        self.markers[bridgeId].infoWindow.open(self.map, self.markers[bridgeId]);
+        self.polygons[bridgeId].setOptions({fillColor: "#000080", strokeColor: "#000080"});
       }, function() {
-        self.markers[bridgeId].setAnimation(null);
-        self.markers[bridgeId].infoWindow.close();
+        self.polygons[bridgeId].setOptions({fillColor: "#FF0000", strokeColor: "#FF0000"});
       });
     }
   },
