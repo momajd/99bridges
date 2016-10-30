@@ -127,7 +127,7 @@ var IndexMap = React.createClass({
     var allBridges = this.props.bridges;
     var removePolygons = [];
 
-    // remove a bridge if it is in the polygons but wasn't received by props
+    // remove a bridge if it is in this.polygons but wasn't received by props
     var self = this;
     Object.keys(this.polygons).forEach(function(bridgeId) {
       var polygon = self.polygons[bridgeId];
@@ -204,7 +204,7 @@ var IndexMap = React.createClass({
   },
 
   addIndexHoverEffects: function() {
-    debugger
+    // highlight polygon when user hovers over the respective index item
     var index = $('.bridge-index-item');
 
     var self = this;
