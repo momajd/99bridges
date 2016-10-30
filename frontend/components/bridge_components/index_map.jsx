@@ -37,7 +37,6 @@ var IndexMap = React.createClass({
 
   componentDidMount: function() {
     this.placeMap();
-    this.markers = {}; //TODO remove
     this.polygons = {};
 
     this.sessionListener = SessionStore.addListener(this.updateMapClickability);
@@ -81,6 +80,7 @@ var IndexMap = React.createClass({
 
   componentDidUpdate: function() {
     this.updatePolygons();
+    this.addIndexHoverEffects();
   },
 
   getMapBounds: function() {
@@ -153,10 +153,10 @@ var IndexMap = React.createClass({
 
     var polygon = new google.maps.Polygon({
         paths: bridgeCoordsParsed,
-        strokeColor: '#FF0000',
+        strokeColor: '#000080',
         strokeOpacity: 0.9,
         strokeWeight: 2,
-        fillColor: '#FF0000',
+        fillColor: '#000080',
         fillOpacity: 0.6,
         map: this.map,
         bridgeId: bridge.id,
@@ -169,7 +169,7 @@ var IndexMap = React.createClass({
     });
 
     this.createInfoWindow(bridge, polygon);
-    this.createMarkerHoverEffects();
+    this.addPolygonHoverEffects(polygon);
     this.polygons[bridge.id] = polygon;
   },
 
@@ -181,24 +181,30 @@ var IndexMap = React.createClass({
           <strong> <a href=#/bridges/${bridge.id}> ${bridge.title} </a></strong>
           <div>
             lat: ${bridge.center_lat.toFixed(5)},
-            lng: ${bridge.center_lat.toFixed(5)}
+            lng: ${bridge.center_lng.toFixed(5)}
           </div>
         </div>`
       )
     });
+    polygon.infoWindow = infoWindow;
+  },
 
+  addPolygonHoverEffects: function(polygon) {
     var self = this;
     google.maps.event.addListener(polygon, 'mouseover', function() {
-      infoWindow.open(self.map);
-      infoWindow.setPosition(polygon.centerCoord);
+      polygon.setOptions({fillColor: "#FF0000", strokeColor: "#FF0000"});
+      polygon.infoWindow.open(self.map);
+      polygon.infoWindow.setPosition(polygon.centerCoord);
     });
 
     google.maps.event.addListener(this.map, 'mousemove', function() {
-      infoWindow.close();
+      polygon.setOptions({fillColor: "#000080", strokeColor: "#000080"});
+      polygon.infoWindow.close();
     });
   },
 
-  createMarkerHoverEffects: function() {
+  addIndexHoverEffects: function() {
+    debugger
     var index = $('.bridge-index-item');
 
     var self = this;
@@ -207,16 +213,21 @@ var IndexMap = React.createClass({
       let bridgeId = indexItem[0].id;
 
       indexItem.hover(function(){
-        self.polygons[bridgeId].setOptions({fillColor: "#000080", strokeColor: "#000080"});
+        var polygon = self.polygons[bridgeId];
+        polygon.setOptions({fillColor: "#FF0000", strokeColor: "#FF0000"});
+        polygon.infoWindow.open(self.map);
+        polygon.infoWindow.setPosition(polygon.centerCoord);
       }, function() {
-        self.polygons[bridgeId].setOptions({fillColor: "#FF0000", strokeColor: "#FF0000"});
+        var polygon = self.polygons[bridgeId];
+        polygon.setOptions({fillColor: "#000080", strokeColor: "#000080"});
+        polygon.infoWindow.close();
       });
     }
   },
 
   render: function () {
     var popoverMessage = this.state.mapIsClickable ? (
-      'Click map to create a bridge') :
+      'For new bridge, click 4 points') :
       ('Sign in to create a bridge');
 
     return (
