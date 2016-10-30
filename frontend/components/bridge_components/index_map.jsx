@@ -160,6 +160,7 @@ var IndexMap = React.createClass({
         fillOpacity: 0.6,
         map: this.map,
         bridgeId: bridge.id,
+        centerCoord: {lat: bridge.center_lat, lng: bridge.center_lng},
         url: 'bridges/' + bridge.id
       });
 
@@ -176,34 +177,20 @@ var IndexMap = React.createClass({
     var bridgeId = bridge.id;
     var infoWindow = new google.maps.InfoWindow({
       content: (
-        `<div class=info-window-text>
-          <h4> <a href=#/bridges/${bridge.id}> ${bridge.title} </a></h4>
-        </div>
-        <div class=street-view id=${bridge.id}></div>`
+        `<div class=info-window>
+          <strong> <a href=#/bridges/${bridge.id}> ${bridge.title} </a></strong>
+          <div>
+            lat: ${bridge.center_lat.toFixed(5)},
+            lng: ${bridge.center_lat.toFixed(5)}
+          </div>
+        </div>`
       )
-    });
-
-    // for street view
-    var pano = null;
-    google.maps.event.addListener(infoWindow, 'domready', function () {
-        if (pano !== null) {
-            pano.unbind("position");
-            pano.setVisible(false);
-        }
-        pano = new google.maps.StreetViewPanorama(document.getElementById(bridgeId), {
-            navigationControl: true,
-            navigationControlOptions: { style: google.maps.NavigationControlStyle.ANDROID },
-            enableCloseButton: false,
-            addressControl: false,
-            linksControl: false
-        });
-        pano.bindTo("position", polygon);
-        pano.setVisible(true);
     });
 
     var self = this;
     google.maps.event.addListener(polygon, 'mouseover', function() {
-      infoWindow.open(self.map, polygon);
+      infoWindow.open(self.map);
+      infoWindow.setPosition(polygon.centerCoord);
     });
 
     google.maps.event.addListener(this.map, 'mousemove', function() {
@@ -266,4 +253,22 @@ module.exports = IndexMap;
 //     location = results[0].geometry.location;
 //     self.map.panTo(location);
 //   }
+// });
+
+// for street view (removed from infoWindow)
+// var pano = null;
+// google.maps.event.addListener(infoWindow, 'domready', function () {
+//     if (pano !== null) {
+//         pano.unbind("position");
+//         pano.setVisible(false);
+//     }
+//     pano = new google.maps.StreetViewPanorama(document.getElementById(bridgeId), {
+//         navigationControl: true,
+//         navigationControlOptions: { style: google.maps.NavigationControlStyle.ANDROID },
+//         enableCloseButton: false,
+//         addressControl: false,
+//         linksControl: false
+//     });
+//     pano.bindTo("position", polygon.centerCoord);
+//     pano.setVisible(true);
 // });

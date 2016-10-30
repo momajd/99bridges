@@ -85,11 +85,12 @@
   margin: 6px;
 }
 
-.street-view {
-  height: 180px;
-  width: 260px;
+.info-window {
+  font-size: 14px;
 }
 
-.info-window-text {
-  width: 260px
-}
+/*street view removed from info window*/
+/*.street-view {
+  height: 180px;
+  width: 260px;
+}*/
