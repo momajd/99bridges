@@ -46,10 +46,11 @@ var IndexMap = React.createClass({
     google.maps.event.addListener(this.map, 'idle', function() {
       var bounds = self.getMapBounds();
       ClientActions.fetchAllBridges(bounds);
-      
+
       // keep reference to last map center so the map defaults to this location
       // if we navigate away from the index page
       window.mapLocation = self.map.getCenter();
+      window.mapZoom = self.map.getZoom();
     });
 
     this.newBridgeCoords = [];
@@ -101,10 +102,11 @@ var IndexMap = React.createClass({
 
   placeMap: function () {
     var mapDOMNode = document.getElementById('index-map');
-    var location = window.mapLocation || {lat: 40.7049859197089, lng: -73.9956557750702};
+    var location = window.mapLocation || {lat: 39.95379, lng: -75.18066};
+    var zoom = window.mapZoom || 17;
     var mapOptions = {
       center: location,
-      zoom: 11
+      zoom: zoom
     };
     this.map = new google.maps.Map(mapDOMNode, mapOptions);
   },

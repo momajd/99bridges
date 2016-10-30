@@ -98,3 +98,5 @@ http://glyphicons.com
 
 ## Future Features
 - [ ] Add events so that users can schedule inspections or other site visits
+- [X] Use polygons instead of markers to represent bridge
+- [ ] Use Cloudinary for photos
