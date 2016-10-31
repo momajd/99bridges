@@ -38,6 +38,7 @@ var IndexMap = React.createClass({
   componentDidMount: function() {
     this.placeMap();
     this.polygons = {};
+    this.markers = {};
 
     this.sessionListener = SessionStore.addListener(this.updateMapClickability);
 
@@ -61,9 +62,7 @@ var IndexMap = React.createClass({
         self.newBridgeCoords.push(coord);
 
         // temporary marker to represent a corner
-        var marker = new google.maps.Marker(
-          {position: e.latLng, map: self.map}
-          );
+        var marker = new google.maps.Marker({position: e.latLng, map: self.map});
         self.tempMarkers.push(marker);
 
         if (self.newBridgeCoords.length === 4) {
@@ -112,8 +111,14 @@ var IndexMap = React.createClass({
   },
 
   updatePolygons: function () {
-    this.newBridgesToAdd().forEach( bridge => { this.createPolygon(bridge);} );
-    this.polygonsToRemove().forEach( poly => {this.removePolygon(poly); });
+    this.newBridgesToAdd().forEach( bridge => {
+      this.createPolygon(bridge);
+      this.createMarker(bridge);
+    } );
+    this.polygonsToRemove().forEach( poly => {
+      this.removePolygon(poly);
+      this.removeMarker(poly.bridgeId);
+    });
   },
 
   newBridgesToAdd: function () {
@@ -177,6 +182,27 @@ var IndexMap = React.createClass({
     this.createInfoWindow(bridge, polygon);
     this.addPolygonHoverEffects(polygon);
     this.polygons[bridge.id] = polygon;
+  },
+
+  createMarker: function(bridge) {
+    var marker = new google.maps.Marker({
+      position: {lat: bridge.center_lat, lng: bridge.center_lng},
+      map: this.map,
+      bridgeId: bridge.id,
+      url: 'bridges/' + bridge.id
+    });
+
+    google.maps.event.addListener(marker, 'click', function() {
+      hashHistory.push(marker.url);
+    });
+
+    this.markers[bridge.id] = marker;
+  },
+
+  removeMarker: function(bridgeId) {
+    var marker = this.markers[bridgeId];
+    marker.setMap(null);
+    delete this.markers[bridgeId];
   },
 
   createInfoWindow: function (bridge, polygon) {

@@ -537,6 +537,39 @@ bridge = Bridge.create([
     lng: "-75.18468976020813"
     },
     user_id: 2
+  },
+
+  {
+    title: "I-76 over Schuylkill River",
+    description: "near UPenn campus",
+    center_lat: 39.942217711889,
+    center_lng: -75.1939165592194,
+    img_url: "https://c1.staticflickr.com/5/4127/5027299523_c46a9f1f76_b.jpg",
+    spans: 5,
+    condition: "Good",
+    superstructure_type: "Steel Through Girder",
+    substructure_type: "Concrete Piers & Abutments",
+    year_built: 1950,
+    length: 3000,
+    width: 60,
+    notes: "",
+    corner1: {
+    lat: "39.941387943200105",
+    lng: "-75.19502699375153"
+    },
+    corner2: {
+    lat: "39.94307421464747",
+    lng: "-75.19333720207214"
+    },
+    corner3: {
+    lat: "39.94308655306586",
+    lng: "-75.19280076026917"
+    },
+    corner4: {
+    lat: "39.941322136642555",
+    lng: "-75.1945012807846"
+    },
+    user_id: 1
   }
 
 
